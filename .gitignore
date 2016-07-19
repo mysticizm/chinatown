@@ -1,0 +1,6 @@
+.svn/
+*.svn-base
+*.sql
+*.zip
+master.log
+config_private.php

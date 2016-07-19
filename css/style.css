@@ -1,0 +1,1173 @@
+@font-face {
+    font-family: Segoe UI semibold;
+    src: url('../fonts/SegoeUI-Semibold_gdi.woff')format('woff');
+	src: url('../fonts/SegoeUI-Semibold_gdi.eot'); 
+	src: url('../fonts/seguisb.ttf')format('truetype');
+}
+body		
+{ 
+	margin: 0px; 
+	padding: 0px; 
+	background: #000000; 
+	font-family: Segoe UI semibold;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	text-align: center;
+	padding: 5px;
+	color:white;
+}
+
+h1
+{
+	font-size: 20px;
+    text-transform: uppercase;
+    font-family: Segoe UI semibold;
+	text-align: center;
+}
+.Main h1
+{
+	text-align:right;
+	width:26%;
+	float:right;
+}
+
+h2
+{
+	font-size: 16px;
+}
+
+h3
+{
+	font-size: 14px;
+}
+
+h4, h5, h6
+{
+	font-size: 12px;
+}
+
+form, p, div, ul, li
+{
+	padding: 0;
+	margin: 0;
+}
+
+ul, li
+{
+	list-style: none;
+}
+
+.ui-widget-header
+{
+	text-align: center;
+    border-radius: 0 0 15px 15px;
+}
+
+}
+a
+{
+	text-decoration:none;
+}
+img 
+{
+	border: 0;
+}
+.menu_topp
+{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#545454+0,0e0e0e+100&1+0,0.71+100 */
+background: -moz-linear-gradient(top,  rgba(84,84,84,1) 0%, rgba(14,14,14,0.71) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(84,84,84,1) 0%,rgba(14,14,14,0.71) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(84,84,84,1) 0%,rgba(14,14,14,0.71) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#545454', endColorstr='#b50e0e0e',GradientType=0 ); /* IE6-9 */
+border-bottom:1px solid grey;
+height:60px;
+}
+.menu_topp a
+{
+	padding: 19px 21.6px;
+	color:white;
+	
+}
+.menu_topp a:hover
+{
+	cursor:pointer;
+}
+.menu
+{
+	position:absolute;
+	top: 15px;
+	left:15%;
+}
+.menu a
+{
+	margin-top: -10px;
+	text-decoration:none;
+	color:white;
+	font-weight:bolder;
+	  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+
+}
+.menu a:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #545454;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  -webkit-transform-origin: 50%;
+  transform-origin: 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+.menu a:hover, .menu a:focus, .menu a:active {
+  background-color:#7fb213;
+}
+.menu a:hover:before, .menu a:focus:before, .menu a:active:before {
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+}
+
+.user
+{
+	font-size: 11px; 
+	font-weight:bold;
+	color:#0be500;
+	position: absolute;
+	left: 12px;
+	background-color:#545454;
+	padding: 6px 10px 10px 10px;
+	border-radius:0 0 10px 10px;
+}
+
+.lang
+{
+	position: absolute;
+	right: 30px;
+	top: 60px;
+	width: 120px;
+}
+
+.lang img
+{
+	border: 1px solid #F6AF3A;
+}
+
+.main  
+{
+	margin: 0.4%;  
+	min-height: 550px;
+}
+
+.right.alarmButton
+{
+	width:25%;
+}
+.button.small.incr,.button.small.decr
+{
+	background:#545454;
+	color:white;
+	font-size: 20px;
+}
+.button.small.incr:hover,.button.small.decr:hover,.radioGroup label:hover
+{
+	-moz-box-shadow:    inset 0 0 10px white;
+	-webkit-box-shadow: inset 0 0 10px white;
+	box-shadow:         inset 0 0 10px white;
+}
+.left
+{
+	float: left;
+	width:40%
+}
+
+.right
+{
+	float: right;
+	width:55%
+}
+
+.left table,
+.right table,
+table.full
+{
+	width: 100%;
+	border: 3px solid #AAAAAA;
+	border-collapse: collapse;
+	font-size: 12px;
+	line-height: 1.4;
+}
+
+table tr.odd td, 
+table tr.odd th, 
+li.odd
+{
+	background: #EEEECC;
+}
+
+table tr.even td,
+table tr.even th, 
+li.even
+{
+	background: #D3EEAF; 
+}
+
+table tr.highlight td
+{
+	background: #FEDC6A;
+}
+
+table tr.slave td
+{
+	color: #988888;
+	border-bottom: 1px solid #999999;
+}
+
+table tr th,
+table tr td
+{
+	text-align: left;
+	padding-left: 5px;
+}
+
+table tr.line
+{
+	background: #d3ffaf;
+	border-bottom: 5px solid white;
+}
+
+table tr.line th
+{
+	width: 35%;
+	font-size: 16px;
+}
+.alarm.odd,.alarm.even
+{
+	border-bottom:1px solid white;
+}
+
+#login_form table
+{
+	float: right; 
+	width: 80%;
+}
+
+#login_form input
+{
+	width: 50%;
+}
+
+#login_form label
+{
+	display: block;
+	text-align: right;
+	width: 90%;
+	color:white;
+}
+
+input.textbox
+{
+	width: 75%;
+}
+
+input.real
+{
+	text-align: right;
+}
+
+input.int,
+input.number
+{
+	text-align: right;
+	width: 80px;
+}
+
+input.time,
+input.time1,
+input.address
+{
+	width: 80px;
+	text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+select, option
+{
+	font-size: 16px;
+	height: 60px;
+	padding: 0 10px;
+	border-radius: 2px;
+	    border: 2px solid #ececec;
+}
+
+.invalid,
+.invalid1
+{
+	background: #FF7777;
+	color: #007700;
+	font-weight: bold;
+}
+
+li.half
+{
+	float: left;
+	width: 50%;
+	text-align: left;
+}
+
+ul.notifier li
+{
+	float: left; 
+	padding: 5px;
+	width: 15px;
+	height: 15px;
+}
+
+input.requiredFlag
+{
+	border: 2px solid #EC5E08;
+	border-radius: 5px;
+}
+
+span.requiredMark
+{
+	color: #EC5E08;
+	font-size: 14px;
+	cursor: help;
+}
+
+.dialog
+{
+	display: none;
+}
+
+td.groups
+{
+	text-align: center;
+}
+
+.groups input[type="checkbox"],
+.radioGroup input[type="radio"]
+{
+	display: none;
+}
+
+.groups input + label,
+.radioGroup input + label,
+.button,
+.button.second,
+.color
+{
+	display: inline-block;
+	font-size: 14px;
+	line-height: 60px;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;
+	padding: 0 10px;
+	-webkit-transition-duration: 0.6s;
+	transition-duration: 0.6s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+}
+.button
+{
+	background: #EFEFEF;
+	color: #000;
+}
+.radioGroup label
+{
+	background:#535353;
+	color:white;
+}
+.groups input[type="checkbox"] + label,
+.button.small
+{
+	width: 40px;
+	padding: 0;
+}
+
+.button:hover
+{
+	background-color: #545454;
+	color:white;
+}
+
+.groups input:checked + label,
+.radioGroup input:checked + label,
+.button:active
+{
+	background: #eb5900;
+	color: #FFFFFF;
+}
+.ui-widget-header a.back,.ui-widget-header a.submit
+{
+	border-radius:5px;
+	padding: 2px;
+    font-family: Segoe UI semibold;
+    font-size: 16px;
+}
+.fullMap
+{
+	clear: both;
+}
+
+#mapContainer
+{
+	position: relative;
+}
+
+.button,
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+.group
+{
+    margin: 0 0 50px 10.6%;
+	position:absolute;
+}
+#command,#filter input
+{
+	width:calc(100% - 435px);
+	border-radius: 5px;
+	height:56px;
+}
+#filter input
+{
+	width: 100px;
+}
+
+.perc
+{
+	color: #1C94C4;
+	font-size: 20px;
+	line-height: 20px;
+}
+
+.ui-accordion table td,
+.ui-accordion table th
+{
+	border: 1px solid #aaa;
+}
+
+.markerLabels 
+{
+	color: #FFF;
+	background: rgba(0, 0, 0, 0.5);
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	width: 100px;     
+}
+
+.color
+{
+	height: 60px;
+	font-size: 20px;
+	text-align: center;
+	cursor: pointer;
+	width: 200px; 
+	line-height: 60px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.hiddenMarker
+{
+	width: 0;
+	height: 0;
+}
+
+.red,
+.RED
+{
+	color: #EB5900;
+}
+
+div.metric
+{
+	position: absolute;
+	left: 55px;
+	top: 10px;
+}
+
+.blue
+{
+	color: #1C94C4;
+}
+
+img.loading
+{
+	vertical-align: middle;
+}
+
+.stateIndicator
+{
+	position: absolute;
+	left: 20px;
+	top: 10px;
+	background: RGBA(0, 0, 0, 0.6);
+	color: #FFFFFF;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.clockIndicator
+{
+	position: absolute;
+	left: 20px;
+	top: 60px;
+	background: RGBA(0, 0, 0, 0.6);
+	color: #FFF;
+	padding: 10px;
+	border-radius: 5px;
+	text-align: right;
+}
+
+.clockIndicator:first-line
+{
+	color: yellow;
+}
+
+#footer
+{
+	color: #FFFFFF;
+	font-size: 10px;
+	padding: 0 2% 10px 2%;
+}
+
+@media print
+{
+	body
+	{
+		background: #EEEEEE; 
+	}
+
+	.menu,
+	.user,
+	h1
+	{
+		display: none;
+	}
+}
+.ui-widget-header a.add
+{
+	padding:5px;
+}
+.user_settings
+{
+	display:inline-block;
+}
+.left.userr div
+{
+	background:transparent;
+}
+.menu_topp li
+	{
+		text-align:center;
+		padding: 4.3px;
+	}
+.menu_topp li:first-child
+{
+	border-bottom:1px solid white;
+}	
+.menu_i
+	{
+		display:none;
+	}
+.button.broadcast img
+	{
+		display:none;
+	}
+.add_i
+	{
+		display:none;
+	}
+#menu_button1
+{
+	display:none;
+}
+#login_form input.button.log
+{
+	width:52.6%;
+}
+.button.broadcast,.button.newDevice,.group select
+	{
+		border-radius: 0 0 10px 10px ;
+		text-decoration: none;
+		width: 151.85px;
+		vertical-align: middle;
+	}
+
+.terminal {
+    margin-top: 20px;
+	padding: 0 2.5%;
+}
+#log
+{
+	padding-top: 10px;
+}
+.ui-icon.ui-icon-check
+	{
+margin: 2px 10px 2px 0;
+	}
+.reload,.cancel
+{
+	height:18px;
+	border-radius:5px;
+}	
+.reload .ui-button-text
+{
+	padding-top:.1em;
+}
+.system .ui-icon.ui-icon-check 
+{
+	margin-top:-10px;
+}
+.header_timing
+{
+	text-shadow:0px 0px 13px 8px grey;
+}
+.menu_topp a.logedout,.menu_topp a.changePassLink
+{
+	padding:2px;
+	text-decoration:none;
+}
+.group span.first
+	{
+		color:white;
+	}
+.group select
+{
+	padding:0 5px;
+}	
+h1
+{
+	font-size: 15px;
+	margin: 5px 5px 30px 5px;
+}
+#leftContent
+{
+	width: 48%;
+}	
+.right 
+{
+    float: right;
+    width: 50%;
+}
+.alarmMessage.ui-state-highlight.ui-corner-all,.alarmAlert.ui-state-error.ui-corner-all
+	{
+		padding: 18px 10px;
+		border-radius: 10px 0 0 10px;
+	}
+.ui-icon.ui-icon-alert
+{	
+ margin: 2px 10px 2px 0;
+}
+.user_settings li:hover
+	{
+		text-shadow: 1px 2px 15px black;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#9dd53a+22,80c217+70,7cbc0a+100 */
+background: rgb(157,213,58); /* Old browsers */
+background: -moz-linear-gradient(top,  rgba(157,213,58,1) 22%, rgba(128,194,23,1) 70%, rgba(124,188,10,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(157,213,58,1) 22%,rgba(128,194,23,1) 70%,rgba(124,188,10,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(157,213,58,1) 22%,rgba(128,194,23,1) 70%,rgba(124,188,10,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=0 ); /* IE6-9 */
+}
+.user_edit
+{
+	margin-top:40px;
+}
+.sys_settings .ui-button-icon-primary.ui-icon.ui-icon-check
+{
+	top:20px;
+}
+.left.new,.right.new
+{
+	width: 48%;
+}
+.expand
+{
+	border:10px solid black;
+}
+.setColor
+{
+	background:#545454;
+	color:white;
+}
+.color,.setColor
+{
+	vertical-align:middle;
+}
+.setPower
+{
+	background:#545454;
+}
+@media only screen and (max-width: 1244px)
+{
+	.group 
+	{
+		margin: 0 0 50px 10.2%;
+		position: absolute;
+	}
+}
+@media only screen and (max-width: 1235px)
+{
+	.group {
+    margin: 0 0 50px 12.5%;
+    left: 6%;
+	}
+	.group span.first
+	{
+		display:none;
+	}
+	.button.broadcast, .button.newDevice, .group select
+	{
+		margin-right:5px;
+		width: 153px;
+	}
+	.group select
+	{
+		width:140px;
+	}
+	.menu {
+    left: 18.5%;
+	}
+	.menu 
+	{
+    left: 18.5%;
+	}
+}
+
+@media only screen and (max-width: 1041px)
+{
+	.button.openHistory,.button.openQueue,.button.help
+	{
+		width: calc(33% - 26px);
+		margin-top:10px;
+	}
+
+	#command
+	{
+		width: calc(100% - 280px);
+	}
+}	
+
+@media only screen and (max-width: 990px)
+{
+	.menu a
+	{
+		padding: 19px 15px;
+	}
+	.menu_topp
+	{
+		height: 60px;
+	}
+	.button.broadcast, .button.newDevice, .group select
+	{
+		width: 126.1px;
+	}
+	.Main h1 
+	{
+		width:35%;
+	}
+}
+
+@media only screen and (max-width: 960px)
+{
+	.button.broadcast span,.button.newDevice span
+	{
+		display:none;
+	}
+	a.button.broadcast,.button.newDevice
+	{
+		width:60px;
+		vertical-align: middle;
+		padding: 10px 0 15px 0;
+	}
+	.menu
+	{
+		display:none;
+	}
+	.menu.show
+	{
+		display:block;
+		width:50%;
+		margin-left: 5%;
+		margin-right: 20%;
+		position:relative;
+		z-index:1000;
+		top:2px;
+		background:grey;
+	}
+	.menu.show a
+	{
+		width:92.6%;
+		transition: background-color 0.5s ease;
+		margin-top:0;
+		padding: 19px 3.7%;
+		text-align: center;
+	}
+	.menu_i
+	{
+		display:inline-block;
+		margin:2px 0 0 45.5%;
+	}
+	.button.broadcast img, .button.newDevice img
+	{
+		display:block;
+		margin: 6px 0 0 13px;
+		vertical-align:middle;
+	}
+	.user_settings
+	{
+		display:none;
+	}
+	.user
+	{
+		cursor:pointer;
+		border-radius: 0 10px 10px 0;
+		padding:20px;
+		top:4.5px;
+		left:1.5px;
+		width:105px;
+		height:18px;
+	}
+	.user.width
+	{
+		border-radius: 0;
+	}
+
+	.user_settings.show
+	{
+		display:block;
+		float: left;
+		top: 63px;
+		position:absolute;
+		background:white;
+		border: 2px solid #545454;
+		border-radius:0 0 15px 15px;
+		z-index:100;
+	}
+	.user_settings li a
+	{
+		color:#545454;	
+	}
+	.user_settings li:hover
+	{
+		text-shadow: 1px 2px 25px black;
+		color:white;
+	}
+	.user_settings li:last-child:hover
+	{
+		border-radius:0 0 13px 13px;
+	}
+	#filter
+	{
+		margin-right:0;
+	}
+	h1
+	{
+		display:block;
+		text-align:center;
+	}
+	.Main h1
+	{
+		margin-bottom:50px;
+		width:100%;
+	}
+	.group
+	{
+		top:86px;
+	}
+	.button.broadcast,.button.newDevice,.group select
+	{
+		border-radius: 10px 10px 0 0;
+	}
+	.group select 
+	{
+		height: 64px;
+	}
+	.alarmMessage.ui-state-highlight.ui-corner-all,.alarmAlert.ui-state-error.ui-corner-all
+	{
+		padding: 8px 10px;
+	}
+	.left.new,.right.new
+	{
+		width: 100%;
+	}
+	div.left.new #form > div.ui-widget-header
+	{
+		border-radius:0;
+	}
+}
+@media only screen and (max-width: 895px)
+{
+	#leftContent #form .ui-widget-header
+	{
+		border-radius:0;
+	}
+	.right.alarmButton {
+		width: 80px;
+		height:58px;
+		border-radius: 7px 0 0 7px;
+	}
+	.alarmAlert
+	{
+		border:13px solid red;
+		border-radius: 10px 0 0 10px;
+		height:32px;
+	}
+	.alarmMessage
+	{
+		border:13px solid green;
+		border-radius: 10px 0 0 10px;
+		height:32px;	
+	}
+	.alarmAlert.ui-state-error.ui-corner-all p,.alarmMessage.ui-state-highlight.ui-corner-all p
+	{
+		display:none;
+	}
+	.alarmMessage.ui-state-highlight.ui-corner-all
+	{
+		padding:0;
+	}
+	.ui-icon.ui-icon-check,.ui-icon.ui-icon-alert
+	{
+		margin:7px 18px 5px 0;
+	}
+	#mapContainer,#leftContent
+	{
+		width:100%;
+	}
+	.ui-button-icon-primary.ui-icon.ui-icon-check 
+	{
+		top: 5px;
+	}
+	.alarmAlert.ui-state-error.ui-corner-all
+	{
+		padding:0;
+	}
+	.broad
+	{
+		border-radius:0;
+	}
+	a.button.broadcast, .button.newDevice 
+	{
+		padding: 10px 0 13px 0;
+	}
+	.expand
+	{
+		border:none;
+	}
+	.button.expandScenes
+	{
+		width:97%;
+	}
+}
+
+@media only screen and (max-width: 820px)
+{
+
+	.menu_topp .changePassLink,.menu_topp .logedout
+	{
+		padding:16.5px 5px 21.5px 5px;
+	}
+	.Main h1
+	{
+		text-align:center;
+	}
+	.group
+	{
+		left: 6%;
+		margin: 0;
+		top: 106px;
+	}
+	.main h1 
+	{
+		margin-bottom: 70px;
+	}
+	.left.userr,.right.editUser
+	{
+		width:100%;
+	}
+	.button.expandScenes {
+    width: 96%;
+	}
+}
+
+@media only screen and (max-width: 650px)
+{
+	.menu.show 
+	{
+		width:100%;
+		margin-left:0;
+		left:0;
+	}
+	.right .alarmButton .alarmAlert .ui-state-error .ui-corner-all p
+	{
+		display:none;
+	}
+	
+	#login_form table
+	{
+		float: none;
+		width: 100%;
+	}
+	.menu_i
+	{
+		
+		margin:2px 0 0 44%;
+	}
+	.newDevice span
+	{
+		display:none;
+	}
+	a.button .newDdevice
+	{
+	height: 59px;
+    vertical-align: middle;
+	}
+	.add_i
+	{
+		display:block;
+	}
+	.terminal #command,#filter #address
+	{
+		width:65%;
+	}
+	a.button.second, input#command 
+	{
+		margin-bottom: 4px;
+	}
+	#filter .button,
+	a.button.second
+	{
+		width: 20.5%;
+	}
+	.button.expandScenes {
+    width: 95.5%;
+	}
+	.user
+	{
+		top:2.5px;
+	}
+}
+@media only screen and (max-width: 510px)
+{
+	.button.expandScenes 
+	{
+		width: 94%;
+	}
+	table.device tbody tr td input
+	{
+		width: 28px;
+	}
+	table.device tbody tr.line th
+	{
+		width:20%;
+	}
+	table tr.line th {
+    width: 30%;
+    font-size: 12px;
+	}
+}
+@media only screen and (max-width: 430px)
+{
+	.menu_i 
+	{
+		margin: 0 0 0 41.5%;
+	}
+	.terminal
+	{
+		padding: 0 0 0 2%;
+	}
+	
+}
+@media only screen and (max-width: 395px)
+{
+	.button.expandScenes {
+    width: 93%;
+	}
+	.group span
+	{
+		display:none;
+	}
+	.user
+	{
+		padding:5px;
+		margin-top:10px;
+		border-radius:5px;
+	}
+	.terminal #command, #filter #address {
+    width: 63%;
+	}
+	.left.new #form table tbody tr.line td.groups label
+	{
+		width:36px;
+	}
+	table.device tbody tr td a.button.small.incr
+	{
+		margin-right:25px;
+	}
+	.perc
+	{
+		margin:0 25px;
+	}
+	
+	.clockIndicator
+	{
+		display: none;
+	}
+}
+@media only screen and (max-width: 350px)
+{
+	.groups input[type="checkbox"] + label
+	{
+		width:30px;
+	}
+	.button.expandScenes {
+    width: 92.5%;
+	}
+	.group 
+	{
+		width: 100%;
+		margin:1%;
+	}
+	.group
+	{
+		width:95%;
+		margin: 0 2% 0 3%;
+	}
+	.menu_i 
+	{
+		margin: 0 0 0 39%;
+	}
+}	

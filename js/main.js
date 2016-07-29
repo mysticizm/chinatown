@@ -283,7 +283,6 @@ function validate(selector)
 			jQuery(inputs[i]).children().removeClass("invalid");
 		}
 	}
-	
 	return !(jQuery(selector).find(".invalid").length + jQuery(selector).find(".invalid1").length);
 }
 

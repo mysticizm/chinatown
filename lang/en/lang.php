@@ -56,4 +56,6 @@ $lang['Language'] = "Language";
 $lang['Bulgarian'] = "Bulgarian";
 $lang['English'] = "English";
 $lang['Italian'] = "Italian";
+$lang['colorpicker']="colorpicker";
+$lang['Schedule']="Schedule";
 ?>

@@ -11,14 +11,14 @@
         echo '<tr class="line">
                 <input class="id" type="hidden" value="'.$row["id"].'">
                 <td><div>' . $row['name'] . '</div></td>'.
-                '<td><input  class="row-group" readonly="readonly" value=';
+                '<td><div><input  class="row-group" readonly="readonly" value=';
                 if(!(is_numeric($row['group_number']))){
                     echo 'Notselected';
                 }
                 else{
                     echo '"Group '.$row['group_number'].'"';
                 }
-                echo '></td>
+                echo '></div></td>
                 <td><a href="http://localhost/chinatown/index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
                 <td><a href="http://localhost/chinatown/index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete schedule</a></td>
                 <td><a href="http://localhost/chinatown/index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
@@ -59,7 +59,7 @@
         }
         var id=$(this).parent().parent().find('.id').val();
         var $element=$('<tr style="display:none;" class="dropdown"><td colspan="6" style="padding-left:0px; "><form class="save-form" action="http://localhost/chinatown/index.php?content=schedule&action=save" method="post"><input name="id" type="hidden" value='+id+'><table><tr>' +
-            '<td><input style="display:block; width:140px" placeholder="New name" name="new-name" type="text"></td>' +
+            '<td><input class="new-name" placeholder="New name" name="new-name" type="text"></td>' +
             '<td><select style="width:165px" name="new-group">' + options +
             '</select></td>' +
             '<td><button style="width:82px;" class="button" type="submit">Save</button>' +

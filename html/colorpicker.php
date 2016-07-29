@@ -1,11 +1,3 @@
-<style>
-	canvas:hover{
-		cursor: crosshair;
-	}
-	tr{
-		border:1px solid white !important;
-	}
-</style>
 <canvas width="250" height="250" id="canvas_picker" style="display:none; border:3px solid yellowgreen; border-radius: 10px;">
 </canvas>
 <script>
@@ -24,7 +16,7 @@
 
                     echo '<tr>
 							<td>'.$counter.'</td>
-                            <td><div class="col" style="position:relative;">HEX: <input class="hidden-row" autocomplete="off" name="hex[]" type="text" value="'.$row['hex'].'" readonly="readonly"></div></td>
+                            <td><div class="col">HEX: <input class="hidden-row" autocomplete="off" name="hex[]" type="text" value="'.$row['hex'].'" readonly="readonly"></div></td>
                             <td><div>Seconds:<input class="int" type="text" name="time[]" autocomplete="off"  value="'.$row['time'].'">
 											 <input type="hidden" name="id[]" value="'.$row['id'].'">
 											 <input type="hidden" class="position" name="position[]" value="'.$counter.'"></div></td>
@@ -102,12 +94,10 @@
 			});
 		</script>
 		<div id="save-colorpicker">
+			<button class="button" type="button" onclick="addRow()">Add another colour!</button>
 			<button class="button submit-button" type="submit" onsubmit="validate()">Save</button>
 		</div>
 	</form>
-	<div id="add-colorpicker">
-		<button class="button" onclick="addRow()">Add another colour!</button>
-	</div>
 </div>
 <script>
 	var submit=$('.submit-button');

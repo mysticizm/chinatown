@@ -570,7 +570,6 @@ img.loading
 	}
 	
 	#schedule td a{
-		background-color:transparent;
 		border:none;
 	}
 	#schedule .edit-button{
@@ -603,14 +602,9 @@ img.loading
 	#save-colorpicker{
 		clear:both;
 		float:right;
-		padding-top:50px;
-		padding-right:45px;
+		padding-right:110px;
 	}
 	
-	#add-colorpicker{
-		float:right;
-		padding-top:50px;
-	}
 canvas:hover{
 	cursor: crosshair;
 }
@@ -1259,16 +1253,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', end
 	}
 	#schedule td:nth-child(2):before
 	{
-		
 		content: "Name: ";
 		font-weight: 700;
 		color: black;
 		float:left;
-		
 	}
 	
 	#schedule td:nth-child(2) div{
-		padding-right:5%;	
+		text-align:center;	
+		padding-right:15%;	
 	}
 	
 	#schedule td:nth-child(3):before
@@ -1279,16 +1272,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', end
 		float:left;
 		padding-top:13px;
 	}
+	#schedule td:nth-child(2) input{
+		text-align:center;	
+		padding-right:15%;	
+	}
 	
 	#schedule td a{
 		width: calc(100% - 20px) !important;
 		text-align:center !important;
 	}
-	#schedule td input{
-		padding-left:36%;
-	}
-	@media 
-only screen and (max-width: 780px) {
+	@media only screen and (max-width: 780px) {
 	#table,#table thead,#table tbody,#table th,#table td,#table tr { 
 		display: block; 
 	}
@@ -1302,16 +1295,18 @@ only screen and (max-width: 780px) {
 	
 	#haha tr td:first-child{
 		text-align:center;
+		font-weight:bold;
 	}
 	#haha tr td:first-child + td{
 		text-align:center;
+		
 	}
 	#haha tr td:first-child + td + td{
 		text-align:center;
+		
 	}
-	#haha tr td:first-child + td + td input{
-		width:195px;
-		margin-right:27px;
+	.row-group{
+		padding-left:21%;
 	}
 	#haha tr td:first-child + td + td + td{
 		text-align:center;
@@ -1322,6 +1317,10 @@ only screen and (max-width: 780px) {
 	#haha tr td:first-child + td + td + td + td +td button{
 		padding-left:calc(100% - 55px) !important;
 		
+	}
+	#save-colorpicker{
+		padding-right:0px;
+		float:right;
 	}
 }
 

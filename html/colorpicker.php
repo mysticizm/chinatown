@@ -1,26 +1,34 @@
+<style>
+	canvas:hover{
+		cursor: crosshair;
+	}
+	tr{
+		border:1px solid white !important;
+	}
+</style>
 <canvas width="250" height="250" id="canvas_picker" style="display:none; border:3px solid yellowgreen; border-radius: 10px;">
 </canvas>
 <script>
 	var id = 0;
 </script>
 
-<div id="table-container">
+<div id="table-container"">
 
 	<form action="http://localhost/chinatown/index.php?content=colorpicker&action=save&id=<?php echo $_GET['id']?>" method="post">
 
-		<table id="table" style="color:white;">
-			<tbody id="table-body">
+		<table id="table">
+			<tbody id="haha">
             <?php
 				$counter=1;
                 while($row = $result->fetch_assoc()){
 
                     echo '<tr>
 							<td>'.$counter.'</td>
-                            <td><div class="col">HEX: <input autocomplete="off" name="hex[]" type="text" value="'.$row['hex'].'" readonly="readonly"></div></td>
+                            <td><div class="col" style="position:relative;">HEX: <input class="hidden-row" autocomplete="off" name="hex[]" type="text" value="'.$row['hex'].'" readonly="readonly"></div></td>
                             <td><div>Seconds:<input class="int" type="text" name="time[]" autocomplete="off"  value="'.$row['time'].'">
 											 <input type="hidden" name="id[]" value="'.$row['id'].'">
 											 <input type="hidden" class="position" name="position[]" value="'.$counter.'"></div></td>
-                            <td><div>RGB: <input name="rgb[]" autocomplete="off" type="text" value="'.$row['rgb'].'" readonly="readonly"></div></td>
+                            <td><div class="col">RGB: <input name="rgb[]" autocomplete="off" type="text" value="'.$row['rgb'].'" readonly="readonly"></div></td>
                             <td><div class="color" style="background-color: ';
 					if($row['hex']!==''){
 						echo $row['hex'];
@@ -62,15 +70,15 @@
 				else{
 					id=1;
 				}
-				var position = +$('#table-body').find('.position').last().val()+1;
-				$('#table-body').append('<tr>' +
+				var position = +$('#haha').find('.position').last().val()+1;
+				$('#haha').append('<tr>' +
 					'<td>'+id+'</td>' +
 					'<td><div class="col">HEX: <input class="hidden-row" autocomplete="off" name="hex[]" type="text" readonly="readonly"/></div></td>' +
 					'<td><div>Seconds:<input class="int" type="text" name="time[]" autocomplete="off">'	+
 					'<input class="val" type="hidden" name="id[]" value="-1">' +
 					'<input class="position" name="position[]" type="hidden" value="'+position+'"></div></td>' +
 					'<td><div class="col">RGB: <input name="rgb[]" autocomplete="off" type="text" readonly="readonly"/></div></td>' +
-					'<td><div class="color" background-color:white;"></div></td>' +
+					'<td><div class="color" style="background-color:white;"></div></td>' +
 					'<td><button class="button delete-row" type="button">Delete</button>' +
 					'</td></tr>');
 			}
@@ -87,8 +95,8 @@
 			});
 			$(function(){
 				$('button').on('submit',function(){
-					if(validate('table-body')===false){
-						alert('table-body');
+					if(validate('haha')===false){
+						alert('haha');
 					}
 				});
 			});
@@ -104,7 +112,7 @@
 <script>
 	var submit=$('.submit-button');
 	submit.on('click',function(){
-		if(!validate('#table-body')){
+		if(!validate('#haha')){
 			alert('Seconds should be number!');
 		}
 	});

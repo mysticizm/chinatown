@@ -1171,3 +1171,45 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', end
 		margin: 0 0 0 39%;
 	}
 }	
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+	/* Force table to not be like tables anymore */
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	table{
+		width:100%:
+	}
+	
+	td { 
+		border: none;
+		position: relative;
+		width:100% !important;
+		border-bottom:1px solid black;
+
+	}
+	td a{
+		width:100% !important;
+		text-align:center !important;
+	}
+	td input{
+		width:100% !important;
+		
+	}
+	
+
+	
+	/*
+	Label the data
+	*/
+}

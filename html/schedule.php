@@ -1,6 +1,8 @@
 <style>
     a{
         text-decoration: none;
+        width:100%:
+        height:100%;
     }
 </style>
 <div>
@@ -36,7 +38,7 @@
         </tbody>
     </table>
 </div>
-<div style="width:500px; margin:auto; padding-top:200px">
+<div style="width:500px; margin:auto; padding-top:50px">
     <form action="http://localhost/chinatown/index.php?content=schedule&action=add" method="post">
         <div>
             <input  name="name" type="text">

@@ -556,6 +556,66 @@ img.loading
 	color: yellow;
 }
 
+#schedule{
+	max-width: 1000px;
+	margin:auto;
+}
+	#schedule a{
+        text-decoration: none;
+        height:100%;
+	}
+	
+	#schedule .row-group{
+		background-color:transparent; border:none; text-align:center; font-size:14px; width:100px; height:50px;
+	}
+	
+	#schedule td a{
+		background-color:transparent;
+		border:none;
+	}
+	#schedule .edit-button{
+		width:100%;
+		height:100%;
+		font-weight:400;
+		background-color:transparent;
+		color:red;
+		border:none;
+	}
+#add-schedule{
+	max-width:500px;
+	margin:auto;
+	padding-top:50px;
+}
+#table-container{
+	max-width:1000px;
+	margin:0 auto;
+}
+
+	#table {
+		color:white;
+	}
+	
+	#table .color{
+		width:65px;
+		height:65px;
+	}
+	
+	#save-colorpicker{
+		clear:both;
+		float:right;
+		padding-top:50px;
+		padding-right:45px;
+	}
+	
+	#add-colorpicker{
+		float:right;
+		padding-top:50px;
+	}
+canvas:hover{
+	cursor: crosshair;
+}
+	
+
 #footer
 {
 	color: #FFFFFF;
@@ -1172,12 +1232,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', end
 	}
 }	
 
-@media 
-only screen and (max-width: 760px),
+@media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
 
 	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
+	#schedule,#schedule thead,#schedule tbody,#schedule th,#schedule td,#schedule tr { 
 		display: block; 
 	}
 	
@@ -1187,35 +1246,82 @@ only screen and (max-width: 760px),
 		top: -9999px;
 		left: -9999px;
 	}
-	table{
+	#schedule{
 		width:100%:
 	}
 	
-	td { 
+	#schedule td { 
 		border: none;
 		position: relative;
 		width: calc(100% - 6px) !important;
 		border-bottom:1px solid black;
 
 	}
-	td:nth-child(3):before
+	#schedule td:nth-child(2):before
 	{
-		content: "Слон: ";
+		
+		content: "Name: ";
 		font-weight: 700;
-		color: blue;
-	}
-	td a{
-		width: calc(100% - 20px) !important;
-		text-align:center !important;
-	}
-	td input{
-		width:100% !important;
+		color: black;
+		float:left;
 		
 	}
 	
-
+	#schedule td:nth-child(2) div{
+		padding-right:5%;	
+	}
 	
-	/*
-	Label the data
-	*/
+	#schedule td:nth-child(3):before
+	{
+		content: "Group: ";
+		font-weight: 700;
+		color: black;
+		float:left;
+		padding-top:13px;
+	}
+	
+	#schedule td a{
+		width: calc(100% - 20px) !important;
+		text-align:center !important;
+	}
+	#schedule td input{
+		padding-left:36%;
+	}
+	@media 
+only screen and (max-width: 780px) {
+	#table,#table thead,#table tbody,#table th,#table td,#table tr { 
+		display: block; 
+	}
+
+	#table thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	
+	#table-body tr td:first-child{
+		text-align:center;
+	}
+	#table-body tr td:first-child + td{
+		text-align:center;
+	}
+	#table-body tr td:first-child + td + td{
+		text-align:center;
+	}
+	#table-body tr td:first-child + td + td input{
+		width:195px;
+		margin-right:27px;
+	}
+	#table-body tr td:first-child + td + td + td{
+		text-align:center;
+	}
+	#table-body tr td:first-child + td + td + td + td div{
+		width: calc(100% - 20px) !important;
+	}
+	#table-body tr td:first-child + td + td + td + td +td button{
+		padding-left:calc(100% - 55px) !important;
+		
+	}
 }
+

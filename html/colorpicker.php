@@ -1,35 +1,27 @@
-<style>
-	canvas:hover{
-		cursor: crosshair;
-	}
-	tr{
-		border:1px solid white !important;
-	}
-</style>
 <canvas width="250" height="250" id="canvas_picker" style="display:none; border:3px solid yellowgreen; border-radius: 10px;">
 </canvas>
 <script>
 	var id = 0;
 </script>
 
-<div style="width:1000px; padding-left:22%;">
+<div id="table-container">
 
 	<form action="http://localhost/chinatown/index.php?content=colorpicker&action=save&id=<?php echo $_GET['id']?>" method="post">
 
 		<table id="table" style="color:white;">
-			<tbody id="haha">
+			<tbody id="table-body">
             <?php
 				$counter=1;
                 while($row = $result->fetch_assoc()){
 
                     echo '<tr>
 							<td>'.$counter.'</td>
-                            <td><div class="col" style="position:relative;">HEX: <input class="hidden-row" autocomplete="off" name="hex[]" type="text" value="'.$row['hex'].'" readonly="readonly"></div></td>
+                            <td><div class="col">HEX: <input autocomplete="off" name="hex[]" type="text" value="'.$row['hex'].'" readonly="readonly"></div></td>
                             <td><div>Seconds:<input class="int" type="text" name="time[]" autocomplete="off"  value="'.$row['time'].'">
 											 <input type="hidden" name="id[]" value="'.$row['id'].'">
 											 <input type="hidden" class="position" name="position[]" value="'.$counter.'"></div></td>
-                            <td><div class="col">RGB: <input name="rgb[]" autocomplete="off" type="text" value="'.$row['rgb'].'" readonly="readonly"></div></td>
-                            <td><div class="color" style="width:65px; height=65px; background-color: ';
+                            <td><div>RGB: <input name="rgb[]" autocomplete="off" type="text" value="'.$row['rgb'].'" readonly="readonly"></div></td>
+                            <td><div class="color" style="background-color: ';
 					if($row['hex']!==''){
 						echo $row['hex'];
 					}
@@ -70,15 +62,15 @@
 				else{
 					id=1;
 				}
-				var position = +$('#haha').find('.position').last().val()+1;
-				$('#haha').append('<tr>' +
+				var position = +$('#table-body').find('.position').last().val()+1;
+				$('#table-body').append('<tr>' +
 					'<td>'+id+'</td>' +
 					'<td><div class="col">HEX: <input class="hidden-row" autocomplete="off" name="hex[]" type="text" readonly="readonly"/></div></td>' +
 					'<td><div>Seconds:<input class="int" type="text" name="time[]" autocomplete="off">'	+
 					'<input class="val" type="hidden" name="id[]" value="-1">' +
 					'<input class="position" name="position[]" type="hidden" value="'+position+'"></div></td>' +
 					'<td><div class="col">RGB: <input name="rgb[]" autocomplete="off" type="text" readonly="readonly"/></div></td>' +
-					'<td><div class="color" style="width:65px; height=65px; background-color:white;"></div></td>' +
+					'<td><div class="color" background-color:white;"></div></td>' +
 					'<td><button class="button delete-row" type="button">Delete</button>' +
 					'</td></tr>');
 			}
@@ -95,24 +87,24 @@
 			});
 			$(function(){
 				$('button').on('submit',function(){
-					if(validate('haha')===false){
-						alert('haha');
+					if(validate('table-body')===false){
+						alert('table-body');
 					}
 				});
 			});
 		</script>
-		<div style="clear:both; float:right; padding-top:50px; padding-right:45px">
+		<div id="save-colorpicker">
 			<button class="button submit-button" type="submit" onsubmit="validate()">Save</button>
 		</div>
 	</form>
-	<div style="float:right;  padding-top:50px;">
+	<div id="add-colorpicker">
 		<button class="button" onclick="addRow()">Add another colour!</button>
 	</div>
 </div>
 <script>
 	var submit=$('.submit-button');
 	submit.on('click',function(){
-		if(!validate('#haha')){
+		if(!validate('#table-body')){
 			alert('Seconds should be number!');
 		}
 	});

@@ -104,15 +104,30 @@ class Schedule extends Controller{
         }
     }
     function save(){
+        $check=true;
         $servername = "localhost";
         $username = "root";
         $password = "";
         $dbname = "chinatown";
         $conn = new mysqli($servername, $username, $password,$dbname);
-        $sql="UPDATE schedule SET name='".$_POST['new-name']."',group_number='".$_POST['new-group'].
-            "' WHERE id=".$_POST['id'];
+        $sql="SELECT group_number FROM schedule";
         $result=$conn->query($sql);
-        $this->showAll();
+        while($row=$result->fetch_assoc()){
+            if($row['group_number']==$_POST['new-group']){
+                $check=false;
+                break;
+            }
+        }
+        if($check){
+            $sql="UPDATE schedule SET name='".$_POST['new-name']."',group_number='".$_POST['new-group'].
+                "' WHERE id=".$_POST['id'];
+            $result=$conn->query($sql);
+            $this->showAll();
+        }
+        else{
+            $this->showAll();
+            echo "<script>alert('Already added schedule for this group!')</script>";
+        }
     }
     function copy(){
         $servername = "localhost";

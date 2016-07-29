@@ -1,18 +1,22 @@
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>
 <div>
     <table style="color:white; width:700px; margin:auto;">
-        <thead>
-
+        <thead class="ui-widget-header">
+            <th align="center">Name</th>
+            <th align="center">Group Number</th>
+            <th colspan="4"></th>
         </thead>
         <tbody>
-
-
 <?php
     while($row = $result -> fetch_assoc()) {
-        echo '<tr>
+        echo '<tr class="line">
                 <input class="id" type="hidden" value="'.$row["id"].'">
-                <td style="color:black; border-radius: 5px; width:160px; text-align:center; background-color: #EFEFEF;">' . $row['name'] . '</td>
-                <td><a href="http://localhost/chinatown/index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>'.
-                '<td><input style="text-align:center; font-size:14px; background-color:#EFEFEF; width:100px; height:50px" readonly="readonly" value=';
+                <td style="color:black; width:160px; text-align:center;">' . $row['name'] . '</td>'.
+                '<td><input  style="background-color:transparent; border:none; text-align:center; font-size:14px; width:100px; height:50px" readonly="readonly" value=';
                 if(!(is_numeric($row['group_number']))){
                     echo 'Notselected';
                 }
@@ -20,9 +24,10 @@
                     echo '"Group '.$row['group_number'].'"';
                 }
                 echo '></td>
-                <td><a href="http://localhost/chinatown/index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button">Delete schedule</a></td>
-                <td><button class="button edit-button" type="button">Edit</button></td>
-                <td><a href="http://localhost/chinatown/index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
+                <td><a style="background-color:transparent;" href="http://localhost/chinatown/index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
+                <td><a style="background-color:transparent;" href="http://localhost/chinatown/index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete schedule</a></td>
+                <td><a style="background-color:transparent; border:none;" href="http://localhost/chinatown/index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
+                <td><button style="width:100%; height:100%; font-weight:400; background-color:transparent; color:red; border:none;" class="button edit-button" type="button">Edit</button></td>
                 </tr>';
 
     }
@@ -52,12 +57,13 @@
 
     $('.edit-button').one('click',function(){
         var options=$('');
-        options+='<option selected="selected">'+'None'+'</option>';
+        options+='<option selected="selected" style="display:none;">'+'New group'+'</option>';
+        options+='<option>'+'None'+'</option>';
         for(i=1;i<=32;i+=1){
             options+='<option value="'+ i +'" >' + i + '</option>';
         }
         var id=$(this).parent().parent().find('.id').val();
-        var $element=$('<tr style="display: none;"><td colspan="6"><form class="save-form" action="http://localhost/chinatown/index.php?content=schedule&action=save" method="post"><input name="id" type="hidden" value='+id+'><table><tr>' +
+        var $element=$('<tr style="display:none;" class="dropdown"><td colspan="6" style="padding-left:0px; "><form class="save-form" action="http://localhost/chinatown/index.php?content=schedule&action=save" method="post"><input name="id" type="hidden" value='+id+'><table><tr>' +
             '<td><input style="display:block; width:140px" placeholder="New name" name="new-name" type="text"></td>' +
             '<td><select style="width:165px" name="new-group">' + options +
             '</select></td>' +
@@ -70,6 +76,15 @@
         $(this).parent().parent().next().toggle();
     });
     $('table').on('click','.cancel-button',function(){
-        $(this).parent().hide();
+        $(this).parents().find('.dropdown').hide();
     });
+
+
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure you want to delete this schedule?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
 </script>

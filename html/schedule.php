@@ -6,7 +6,7 @@
     }
 </style>
 <div>
-    <table style="color:white; width:700px; margin:auto;">
+    <table style="color:white; max-width: 700px; margin:auto;">
         <thead class="ui-widget-header">
             <th align="center">Name</th>
             <th align="center">Group Number</th>
@@ -38,7 +38,7 @@
         </tbody>
     </table>
 </div>
-<div style="width:500px; margin:auto; padding-top:50px">
+<div style="max-width:500px; margin:auto; padding-top:50px">
     <form action="http://localhost/chinatown/index.php?content=schedule&action=add" method="post">
         <div>
             <input  name="name" type="text">

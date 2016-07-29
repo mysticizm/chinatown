@@ -1,15 +1,11 @@
 <?php
 
-// *************** ÇÀ LOCALHOST ***************************
 
-$PROJECT_DIRECTORY     = "/chinatown/"; // main directory for project
+$PROJECT_DIRECTORY     = "/chinatown/"; // main directory 
 
 define("HOST", "localhost");
-define("USER", "root");
-define("PASSWORD","");
-define("DATABASE", "chinatown");
-//*************************************************************
+define("USER", "database-user");
+define("PASSWORD","database-pass");
+define("DATABASE", "database-name");
 
-
-define ("PROJECT_DIRECTORY", $PROJECT_DIRECTORY);
 ?>

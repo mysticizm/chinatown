@@ -1194,12 +1194,12 @@ only screen and (max-width: 760px),
 	td { 
 		border: none;
 		position: relative;
-		width:100% !important;
+		width: calc(100% - 6px) !important;
 		border-bottom:1px solid black;
 
 	}
 	td a{
-		width:100% !important;
+		width: calc(100% - 20px) !important;
 		text-align:center !important;
 	}
 	td input{

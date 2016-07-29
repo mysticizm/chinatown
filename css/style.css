@@ -1300,26 +1300,26 @@ only screen and (max-width: 780px) {
 	}
 	
 	
-	#table-body tr td:first-child{
+	#haha tr td:first-child{
 		text-align:center;
 	}
-	#table-body tr td:first-child + td{
+	#haha tr td:first-child + td{
 		text-align:center;
 	}
-	#table-body tr td:first-child + td + td{
+	#haha tr td:first-child + td + td{
 		text-align:center;
 	}
-	#table-body tr td:first-child + td + td input{
+	#haha tr td:first-child + td + td input{
 		width:195px;
 		margin-right:27px;
 	}
-	#table-body tr td:first-child + td + td + td{
+	#haha tr td:first-child + td + td + td{
 		text-align:center;
 	}
-	#table-body tr td:first-child + td + td + td + td div{
+	#haha tr td:first-child + td + td + td + td div{
 		width: calc(100% - 20px) !important;
 	}
-	#table-body tr td:first-child + td + td + td + td +td button{
+	#haha tr td:first-child + td + td + td + td +td button{
 		padding-left:calc(100% - 55px) !important;
 		
 	}

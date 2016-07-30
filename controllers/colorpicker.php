@@ -20,7 +20,7 @@ class Colorpicker extends Controller{
 		$username = "root";
 		$password = "";
 		$dbname = "chinatown";
-		$conn = new mysqli($servername, $username, $password,$dbname);
+		$conn = $this->SQL->mysqli;
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
@@ -40,7 +40,7 @@ class Colorpicker extends Controller{
         $username = "root";
         $password = "";
         $dbname = "chinatown";
-        $conn = new mysqli($servername, $username, $password,$dbname);
+        $conn = $this->SQL->mysqli;
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }

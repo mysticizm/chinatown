@@ -19,9 +19,9 @@
                     echo '"Group '.$row['group_number'].'"';
                 }
                 echo '></div></td>
-                <td><a href="http://localhost/chinatown/index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
-                <td><a href="http://localhost/chinatown/index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete schedule</a></td>
-                <td><a href="http://localhost/chinatown/index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
+                <td><a href="'.PROJECT_DIRECTORY.'index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
+                <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete schedule</a></td>
+                <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
                 <td><button class="button edit-button" type="button">Edit</button></td>
                 </tr>';
 
@@ -32,7 +32,7 @@
     </table>
 </div>
 <div id="add-schedule">
-    <form action="http://localhost/chinatown/index.php?content=schedule&action=add" method="post">
+    <form action="<?php echo PROJECT_DIRECTORY; ?>index.php?content=schedule&action=add" method="post">
         <div>
             <input  name="name" type="text">
             <select name="group_number">
@@ -58,7 +58,7 @@
             options+='<option value="'+ i +'" >' + i + '</option>';
         }
         var id=$(this).parent().parent().find('.id').val();
-        var $element=$('<tr style="display:none;" class="dropdown"><td colspan="6" style="padding-left:0px; "><form class="save-form" action="http://localhost/chinatown/index.php?content=schedule&action=save" method="post"><input name="id" type="hidden" value='+id+'><table><tr>' +
+        var $element=$('<tr style="display:none;" class="dropdown"><td colspan="6" style="padding-left:0px; "><form class="save-form" action="<?php echo PROJECT_DIRECTORY; ?>index.php?content=schedule&action=save" method="post"><input name="id" type="hidden" value='+id+'><table><tr>' +
             '<td><input class="new-name" placeholder="New name" name="new-name" type="text"></td>' +
             '<td><select style="width:165px" name="new-group">' + options +
             '</select></td>' +

@@ -4,9 +4,9 @@
 	var id = 0;
 </script>
 
-<div id="table-container"">
+<div id="table-container">
 
-	<form action="http://localhost/chinatown/index.php?content=colorpicker&action=save&id=<?php echo $_GET['id']?>" method="post">
+	<form action="<?php echo PROJECT_DIRECTORY; ?>index.php?content=colorpicker&action=save&id=<?php echo $_GET['id']?>" method="post">
 
 		<table id="table">
 			<tbody id="haha">

@@ -18,7 +18,7 @@ class Schedule extends Controller{
 		$username = "root";
 		$password = "";
 		$dbname = "chinatown";
-		$conn = new mysqli($servername, $username, $password,$dbname);
+		$conn = $this->SQL->mysqli;
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
@@ -37,7 +37,7 @@ class Schedule extends Controller{
 		$username = "root";
 		$password = "";
 		$dbname = "chinatown";
-		$conn = new mysqli($servername, $username, $password,$dbname);
+		$conn = $this->SQL->mysqli;
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
@@ -58,7 +58,7 @@ class Schedule extends Controller{
 		$username = "root";
 		$password = "";
 		$dbname = "chinatown";
-		$conn = new mysqli($servername, $username, $password,$dbname);
+		$conn = $this->SQL->mysqli;
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
@@ -84,7 +84,7 @@ class Schedule extends Controller{
         $username = "root";
         $password = "";
         $dbname = "chinatown";
-        $conn = new mysqli($servername, $username, $password,$dbname);
+        $conn = $this->SQL;
         $sql = "SELECT group_number FROM schedule";
         $result=$conn->query($sql);
         while($row=$result->fetch_assoc())
@@ -109,7 +109,7 @@ class Schedule extends Controller{
         $username = "root";
         $password = "";
         $dbname = "chinatown";
-        $conn = new mysqli($servername, $username, $password,$dbname);
+        $conn = $this->SQL->mysqli;
         $sql="SELECT group_number FROM schedule";
         $result=$conn->query($sql);
         while($row=$result->fetch_assoc()){
@@ -134,7 +134,7 @@ class Schedule extends Controller{
         $username = "root";
         $password = "";
         $dbname = "chinatown";
-        $conn = new mysqli($servername, $username, $password,$dbname);
+        $conn = $this->SQL->mysqli;
         $sql="INSERT INTO schedule (name) 
               SELECT name
               FROM schedule 

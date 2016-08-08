@@ -11,19 +11,32 @@
 		<table id="table">
 			<tbody id="haha">
             <?php
+
 				$counter=1;
                 while($row = $result->fetch_assoc()){
+					$rgb=explode(',',$row['rgb']);
+					var_dump($rgb);
+					echo '<br>';
+					echo '<br>';
+					$r=$rgb[0];
+					$g=$rgb[1];
+					$b=$rgb[2];
+					echo $r.' '.$g.' '.$b;
+					echo '<br>';
+					echo '<br>';
 
                     echo '<tr>
 							<td>'.$counter.'</td>
-                            <td><div class="col">HEX: <input class="hidden-row" autocomplete="off" name="hex[]" type="text" value="'.$row['hex'].'" readonly="readonly"></div></td>
-                            <td><div>Seconds:<input class="int" type="text" name="time[]" autocomplete="off"  value="'.$row['time'].'">
+                            <td><div class="col"><input class="hidden-row" autocomplete="off" name="hex[]" type="hidden" value="'.$row['hex'].'" readonly="readonly"></div></td>
+                            <td><div><input type="time" step="1" name="time[]" autocomplete="off"  value="'.$row['time'].'">
 											 <input type="hidden" name="id[]" value="'.$row['id'].'">
 											 <input type="hidden" class="position" name="position[]" value="'.$counter.'"></div></td>
-                            <td><div class="col">RGB: <input name="rgb[]" autocomplete="off" type="text" value="'.$row['rgb'].'" readonly="readonly"></div></td>
-                            <td><div class="color" style="background-color: ';
-					if($row['hex']!==''){
-						echo $row['hex'];
+                            <td><div class="col"><input class="red" name="rgb[]" autocomplete="off" type="text" value="'.$r.'"></div></td>
+                            <td><div class="col"><input class="green" name="rgb[]" autocomplete="off" type="text" value="'.$g.'"></div></td>
+                            <td><div class="col"><input class="blue" name="rgb[]" autocomplete="off" type="text" value="'.$b.'"></div></td>
+                            <td><div class="color" style="background-color:rgb( ';
+					if($row['rgb']!==''){
+						echo $row['rgb'].')';
 					}
 					else{
 						echo '#FFFFFF';
@@ -65,18 +78,18 @@
 				var position = +$('#haha').find('.position').last().val()+1;
 				$('#haha').append('<tr>' +
 					'<td>'+id+'</td>' +
-					'<td><div class="col">HEX: <input class="hidden-row" autocomplete="off" name="hex[]" type="text" readonly="readonly"/></div></td>' +
-					'<td><div>Seconds:<input class="int" type="text" name="time[]" autocomplete="off">'	+
+					'<td><div class="col"><input class="hidden-row" autocomplete="off" name="hex[]" type="hidden" readonly="readonly"/></div></td>' +
+					'<td><div><input type="time" step="1" name="time[]">'	+
 					'<input class="val" type="hidden" name="id[]" value="-1">' +
 					'<input class="position" name="position[]" type="hidden" value="'+position+'"></div></td>' +
-					'<td><div class="col">RGB: <input name="rgb[]" autocomplete="off" type="text" readonly="readonly"/></div></td>' +
+					'<td><div class="col"><input class="red" name="rgb[]" autocomplete="off" type="text"></div></td>' +
+					'<td><div class="col"><input class="green" name="rgb[]" autocomplete="off" type="text"></div></td>' +
+					'<td><div class="col"><input class="blue" name="rgb[]" autocomplete="off" type="text"></div></td>' +
 					'<td><div class="color" style="background-color:white;"></div></td>' +
 					'<td><button class="button delete-row" type="button">Delete</button>' +
 					'</td></tr>');
 			}
 			$('table').on('click','.delete-row',function(){
-
-
 				if($(this).parent().parent().find(".val").length){
 					$(this).parent().parent().remove();
 				}
@@ -91,6 +104,28 @@
 						alert('haha');
 					}
 				});
+			});
+			$('.red').on('change',function(){
+				$red=$(this).val();
+				$green=$(this).parent().parent().parent().find('.green').val();
+				$blue=$(this).parent().parent().parent().find('.blue').val();
+				$a=$(this).parent().parent().find('.color');
+
+				$(this).parent().parent().parent().find('.color').css("background-color", "rgb("+ $red+"," + $green + "," + $blue + ")");
+			});
+			$('.green').on('change',function(){
+				$green=$(this).val();
+				$red=$(this).parent().parent().parent().find('.red').val();
+				$blue=$(this).parent().parent().parent().find('.blue').val();
+				$a=$(this).parent().parent().find('.color');
+				$(this).parent().parent().parent().find('.color').css("background-color", "rgb("+ $red+"," + $green + "," + $blue + ")");
+			});
+			$('.blue').on('change',function(){
+				$blue=$(this).val();
+				$red=$(this).parent().parent().parent().find('.red').val();
+				$green=$(this).parent().parent().parent().find('.green').val();
+				$a=$(this).parent().parent().find('.color');
+				$(this).parent().parent().parent().find('.color').css("background-color", "rgb("+ $red+"," + $green + "," + $blue + ")");
 			});
 		</script>
 		<div id="save-colorpicker">
@@ -108,9 +143,15 @@
 	});
 
 	var inputArray = new Array();
+	var RInput=null;
+	var GInput=null;
+	var BInput=null;
 	var currentRow = null;
 	$('table').on("click","tr",function(){
 		inputArray = $(this).find('input');
+		RInput=$(this).find('input:eq(4)');
+		GInput=$(this).find('input:eq(5)');
+		BInput=$(this).find('input:eq(6)');
 		currentRow = $(this).find('.color');
 	});
 	var canvas = document.getElementById('canvas_picker').getContext('2d');
@@ -126,8 +167,13 @@
 		var R=imgData[0];
 		var G=imgData[1];
 		var B=imgData[2];
+
+		RInput.val(R);
+		GInput.val(G);
+		BInput.val(B);
+
 		var rgb=R + ',' + G + ',' + B;
-		inputArray.last().val(rgb);
+
 		function rgbToHex(R,G,B) {return toHex(R)+toHex(G)+toHex(B)}
 		function toHex(n) {
 			n = parseInt(n,10);
@@ -135,21 +181,19 @@
 			n = Math.max(0,Math.min(n,255));return "0123456789ABCDEF".charAt((n-n%16)/16) + "0123456789ABCDEF".charAt(n%16);
 		}
 		var hex = rgbToHex(R,G,B);
-		inputArray.first().val('#' + hex);
-		$(currentRow[0]).css("background-color" , "#" + hex);
+		$(currentRow[0]).css("background-color", "rgb("+ RInput.val()+"," + GInput.val() + "," + BInput.val() + ")");
 	});
 	$('table').on("hover",function(){
 		$('tr .color').mousedown(function(){
 			var pos = $(this).position();
-
-			var width=$('input').outerWidth();
+			//var width=$('input').outerWidth();
 
 			$("#canvas_picker").css({
-				width: width,
 				position: "absolute",
 				top: pos.top + 65 + "px",
 				left: (pos.left)  + "px"
 			}).toggle();
 		});
 	});
+
 </script>

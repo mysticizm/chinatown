@@ -36,23 +36,28 @@ class Colorpicker extends Controller{
 	}
 	function save()
     {
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "chinatown";
+        var_dump($_POST);
+
         $conn = $this->SQL->mysqli;
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+        $counter=0;
+        for($i=0;$i<count($_POST['rgb']);$i+=3){
+            $temp[$counter++]=$_POST['rgb'][$i].','.$_POST['rgb'][$i+1].','.$_POST['rgb'][$i+2];
+        }
+        var_dump($temp);
 		if(count($_POST)>0){
             for($i = 0 ;$i < count($_POST['id']);++$i){
                 if($_POST['id'][$i]>=0){
-                    $sql="UPDATE colorpicker SET rgb='".$_POST['rgb'][$i]."',hex='".$_POST['hex'][$i]."',time='".$_POST['time'][$i]."',`position`=".$_POST['position'][$i]."
+                    $sql="UPDATE colorpicker 
+                    SET rgb='".$temp[$i]."',hex='".$_POST['hex'][$i]."',time='".$_POST['time'][$i]."',`position`=".$_POST['position'][$i]."
                     WHERE id='".$_POST['id'][$i]."'";
                     $result=$conn->query($sql);
                 }
                 else{
-                    $sql="INSERT INTO colorpicker (hex,rgb,time,schedule_id,`position`) VALUES ('".$_POST['hex'][$i]."','".$_POST['rgb'][$i]."','".$_POST['time'][$i]."','".$_GET['id']."','".$_POST['position'][$i]."')";
+                    $sql="INSERT INTO colorpicker (hex,rgb,time,schedule_id,`position`) 
+                          VALUES ('".$_POST['hex'][$i]."','".$_POST['rgb'][$i]."','".$_POST['time'][$i]."','".$_GET['id']."','".$_POST['position'][$i]."')";
                     $result=$conn->query($sql);
                     $_POST['hex'][$i]=1;
                 }

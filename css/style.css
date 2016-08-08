@@ -321,6 +321,12 @@ select, option
 	    border: 2px solid #ececec;
 }
 
+input[type="time"]
+{
+	width:100%	;
+	height:60px;
+}
+
 .invalid,
 .invalid1
 {
@@ -510,6 +516,9 @@ td.groups
 {
 	color: #EB5900;
 }
+.green{
+	color:green;
+}
 
 div.metric
 {
@@ -608,6 +617,7 @@ img.loading
 canvas:hover{
 	cursor: crosshair;
 }
+
 	
 
 #footer
@@ -1254,7 +1264,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', end
 	#schedule td:nth-child(2):before
 	{
 		
-	}
+	}	
 	.new-name{
 		width:100%;
 	}

@@ -66,7 +66,6 @@
     </form>
 </div>
 <script>
-
     $('.edit-button').one('click',function(){
         var options=$('');
         options+='<option selected="selected" style="display:none;">'+'New group'+'</option>';
@@ -86,10 +85,18 @@
         $element.insertAfter($(this).parent().parent());
 		$(this).parent().parent().next().find(".date").datepicker({ dateFormat: 'yy-mm-dd' });
     });
+
     $('.edit-button').on('click',function(){
         $(this).parent().parent().next().toggle();
-        //var $temp = $(this).parent().parent().find('td:eq(0)');
+        var $tempName = $(this).parent().parent().find('td:eq(0)')[0].innerText;
+        var $tempGroupNumber = $($(this).parent().parent().find('td:eq(1)')[0].firstChild.firstChild).val().split(" ");
+        var $tempDate = $($(this).parent().parent().find('td:eq(2)')[0].firstChild).val();
+        $($(this).parent().parent().next().find(".new-name")).val($tempName);
+        $($(this).parent().parent().next().find("select")).val($tempGroupNumber);
+        $($(this).parent().parent().next().find(".date")).val($tempDate);
     });
+
+
 
     $('table').on('click','.cancel-button',function(){
         $(this).parents().find('.dropdown').hide();

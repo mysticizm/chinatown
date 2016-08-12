@@ -84,19 +84,15 @@
             '<button style="width:82px;" class="cancel-button button" type="button">Cancel</button></td>' +
             '</tr></table></form></td></tr>');
         $element.insertAfter($(this).parent().parent());
+		$(this).parent().parent().next().find(".date").datepicker({ dateFormat: 'yy-mm-dd' });
     });
     $('.edit-button').on('click',function(){
         $(this).parent().parent().next().toggle();
-        var $temp = $(this).parent().parent().find('td:eq(0)');
-        console.log($temp.td.innerHTML);
+        //var $temp = $(this).parent().parent().find('td:eq(0)');
     });
 
     $('table').on('click','.cancel-button',function(){
         $(this).parents().find('.dropdown').hide();
-    });
-
-    $('body').on('click','.date',function(){
-        $(this).datepicker({ dateFormat: 'yy-mm-dd' });
     });
 
 

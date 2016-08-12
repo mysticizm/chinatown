@@ -10,50 +10,43 @@
 
 		<table id="table">
 			<tbody id="haha">
-            <?php
+			<?php
 
-				$counter=1;
-                while($row = $result->fetch_assoc()){
-					$rgb=explode(',',$row['rgb']);
-					var_dump($rgb);
-					echo '<br>';
-					echo '<br>';
-					$r=$rgb[0];
-					$g=$rgb[1];
-					$b=$rgb[2];
-					echo $r.' '.$g.' '.$b;
-					echo '<br>';
-					echo '<br>';
-
-                    echo '<tr>
+			$counter=1;
+			while($row = $result->fetch_assoc()){
+				$rgb=explode(',',$row['rgb']);
+				$r=$rgb[0];
+				$g=$rgb[1];
+				$b=$rgb[2];
+				echo '<tr>
 							<td>'.$counter.'</td>
                             <td><div class="col"><input class="hidden-row" autocomplete="off" name="hex[]" type="hidden" value="'.$row['hex'].'" readonly="readonly"></div></td>
-                            <td><div><input type="time" step="1" name="time[]" autocomplete="off"  value="'.$row['time'].'">
+                            <td><div><input type="text" step="1" name="time[]" autocomplete="off"  value="'.$row['time'].'" placeholder="HH:MM:SS">
 											 <input type="hidden" name="id[]" value="'.$row['id'].'">
 											 <input type="hidden" class="position" name="position[]" value="'.$counter.'"></div></td>
                             <td><div class="col"><input class="red" name="rgb[]" autocomplete="off" type="text" value="'.$r.'"></div></td>
                             <td><div class="col"><input class="green" name="rgb[]" autocomplete="off" type="text" value="'.$g.'"></div></td>
                             <td><div class="col"><input class="blue" name="rgb[]" autocomplete="off" type="text" value="'.$b.'"></div></td>
                             <td><div class="color" style="background-color:rgb( ';
-					if($row['rgb']!==''){
-						echo $row['rgb'].')';
-					}
-					else{
-						echo '#FFFFFF';
-					}
-					echo '"></div></td>';
+				if($row['rgb']!==''){
+					echo $row['rgb'].')';
+				}
+				else{
+					echo '#FFFFFF';
+				}
+				echo '"></div></td>';
 
-                    if(isset($row['rgb']) && isset($row['hex'])){
-                        echo '<td><button class="button delete-row" type="button"">
+				if(isset($row['rgb']) && isset($row['hex'])){
+					echo '<td><button class="button delete-row" type="button"">
                        	'.'Delete'.'</button></td></tr>';
-                    }
-                    else{
-                        echo '</tr>';
-                    }
-					$counter++;
-                }
+				}
+				else{
+					echo '</tr>';
+				}
+				$counter++;
+			}
 
-            ?>
+			?>
 			</tbody>
 		</table>
 		<script>
@@ -79,7 +72,7 @@
 				$('#haha').append('<tr>' +
 					'<td>'+id+'</td>' +
 					'<td><div class="col"><input class="hidden-row" autocomplete="off" name="hex[]" type="hidden" readonly="readonly"/></div></td>' +
-					'<td><div><input type="time" step="1" name="time[]">'	+
+					'<td><div><input type="text"  name="time[]" placeholder="HH:MM:SS">'	+
 					'<input class="val" type="hidden" name="id[]" value="-1">' +
 					'<input class="position" name="position[]" type="hidden" value="'+position+'"></div></td>' +
 					'<td><div class="col"><input class="red" name="rgb[]" autocomplete="off" type="text"></div></td>' +
@@ -105,22 +98,21 @@
 					}
 				});
 			});
-			$('.red').on('change',function(){
+			$('#table').on('keyup',".red",function(){
 				$red=$(this).val();
 				$green=$(this).parent().parent().parent().find('.green').val();
 				$blue=$(this).parent().parent().parent().find('.blue').val();
 				$a=$(this).parent().parent().find('.color');
-
 				$(this).parent().parent().parent().find('.color').css("background-color", "rgb("+ $red+"," + $green + "," + $blue + ")");
 			});
-			$('.green').on('change',function(){
+			$('#table').on('keyup','.green',function(){
 				$green=$(this).val();
 				$red=$(this).parent().parent().parent().find('.red').val();
 				$blue=$(this).parent().parent().parent().find('.blue').val();
 				$a=$(this).parent().parent().find('.color');
 				$(this).parent().parent().parent().find('.color').css("background-color", "rgb("+ $red+"," + $green + "," + $blue + ")");
 			});
-			$('.blue').on('change',function(){
+			$('#table').on('keyup','.blue',function(){
 				$blue=$(this).val();
 				$red=$(this).parent().parent().parent().find('.red').val();
 				$green=$(this).parent().parent().parent().find('.green').val();

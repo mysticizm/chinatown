@@ -578,6 +578,11 @@ img.loading
 		background-color:transparent; border:none; text-align:center; font-size:14px; width:100px; height:50px;
 	}
 	
+	.td-date{
+		background-color:transparent;
+		text-align: center;
+	}
+	
 	#schedule td a{
 		border:none;
 	}
@@ -590,7 +595,7 @@ img.loading
 		border:none;
 	}
 #add-schedule{
-	max-width:500px;
+	max-width:850px;
 	margin:auto;
 	padding-top:50px;
 }
@@ -613,6 +618,8 @@ img.loading
 		float:right;
 		padding-right:110px;
 	}
+	
+
 	
 canvas:hover{
 	cursor: crosshair;
@@ -1299,27 +1306,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', end
 		text-align:center;
 		font-weight:bold;
 	}
-	#haha tr td:first-child + td{
-		text-align:center;
-		
-	}
 	#haha tr td:first-child + td + td{
 		text-align:center;
 	}
-	#haha tr td:first-child + td + td input{
-		width:195px;
-		margin-right:28px;
-	}
-	#haha tr td:first-child + td + td + td{
+	#haha tr td:first-child + td + td +td{
 		text-align:center;
 	}
-	#haha tr td:first-child + td + td + td + td div{
-		width: calc(100% - 20px) !important;
+	#haha tr td:first-child + td + td +td + td{
+		text-align:center;
 	}
-	#haha tr td:first-child + td + td + td + td +td button{
-		padding-left:calc(100% - 55px) !important;
+	#haha tr td:first-child + td + td +td +td +td{
+		text-align:center;
+	}
+	#haha tr td:first-child + td + td +td +td +td +td div{
+		width:calc(100% - 25px);
 		
 	}
+	#haha tr td:first-child + td + td +td +td +td +td + td button{
+		width:calc(100% - 5px);
+	}
+	
+	
 	#save-colorpicker{
 		padding-right:0px;
 		float:right;

@@ -1,32 +1,47 @@
 <div>
     <table id="schedule">
         <thead class="ui-widget-header">
-            <th align="center">Name</th>
-            <th align="center">Group Number</th>
-            <th colspan="4"></th>
+        <th align="center">Name</th>
+        <th align="center">Group Number</th>
+        <th align="center">Date</th>
+        <th colspan="4"></th>
         </thead>
         <tbody>
-<?php
-    while($row = $result -> fetch_assoc()) {
-        echo '<tr class="line">
+        <?php
+        while($row = $result -> fetch_assoc()) {
+            echo '<tr class="line">
                 <input class="id" type="hidden" value="'.$row["id"].'">
                 <td><div>' . $row['name'] . '</div></td>'.
                 '<td><div><input  class="row-group" readonly="readonly" value=';
-                if(!(is_numeric($row['group_number']))){
-                    echo 'Notselected';
-                }
-                else{
-                    echo '"Group '.$row['group_number'].'"';
-                }
-                echo '></div></td>
-                <td><a href="'.PROJECT_DIRECTORY.'index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
-                <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete schedule</a></td>
-                <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
-                <td><button class="button edit-button" type="button">Edit</button></td>
-                </tr>';
+            if(!(is_numeric($row['group_number']))){
+                echo 'Notselected';
+            }
+            else{
+                echo '"Group '.$row['group_number'].'"';
+            }
+            echo '></div></td>
+                <td><input class="td-date" type="text" value="'.$row['date'].'" readonly="readonly"><label>Every day<input name="every_day" type="checkbox" readonly="readonly" disabled="disabled"';
+            if($row['every_day']==1){
+                echo 'checked="checked"/></label></td>
+                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
+                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete schedule</a></td>
+                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
+                         <td><button class="button edit-button" type="button">Edit</button></td>
+                        </tr>';
+            }
+            else{
+                echo '/></label></td>
+                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
+                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete schedule</a></td>
+                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
+                        <td><button class="button edit-button" type="button">Edit</button></td>
+                        </tr>';
+            }
 
-    }
-?>
+
+
+        }
+        ?>
 
         </tbody>
     </table>
@@ -41,10 +56,12 @@
                 <?php
                 for ($i = 1; $i <= 32; $i += 1) {
                     echo '<option value="'.$i.'">'.$i.'</option>';
-                    }
-                    echo '</select>';
+                }
+                echo '</select>';
                 ?>
-            <button style="" type="submit" class="button">Add schedule</button>
+                <input type="text" class="date" name="date" autocomplete="off">
+                <label style="color:white;">Every day<input name="every-day" type="checkbox" /></label>
+                <button style="" type="submit" class="button">Add schedule</button>
         </div>
     </form>
 </div>
@@ -62,16 +79,24 @@
             '<td><input class="new-name" placeholder="New name" name="new-name" type="text"></td>' +
             '<td><select style="width:165px" name="new-group">' + options +
             '</select></td>' +
+            '<td><input type="text" name="date" class="date" autocomplete="off"><label style="color:white;">Every day<input name="every_day" type="checkbox" /></label></td></td>' +
             '<td><button style="width:82px;" class="button" type="submit">Save</button>' +
-                '<button style="width:82px;" class="cancel-button button" type="button">Cancel</button></td>' +
+            '<button style="width:82px;" class="cancel-button button" type="button">Cancel</button></td>' +
             '</tr></table></form></td></tr>');
         $element.insertAfter($(this).parent().parent());
     });
     $('.edit-button').on('click',function(){
         $(this).parent().parent().next().toggle();
+        var $temp = $(this).parent().parent().find('td:eq(0)');
+        console.log($temp.td.innerHTML);
     });
+
     $('table').on('click','.cancel-button',function(){
         $(this).parents().find('.dropdown').hide();
+    });
+
+    $('body').on('click','.date',function(){
+        $(this).datepicker({ dateFormat: 'yy-mm-dd' });
     });
 
 
@@ -82,4 +107,5 @@
     for (var i = 0, l = elems.length; i < l; i++) {
         elems[i].addEventListener('click', confirmIt, false);
     }
+
 </script>

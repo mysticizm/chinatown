@@ -80,19 +80,24 @@ class Schedule extends Controller{
     function add(){
         $group=$_POST['group_number'];
         $check=true;
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "chinatown";
         $conn = $this->SQL;
         $sql = "SELECT group_number FROM schedule";
         $result=$conn->query($sql);
+        var_dump($_POST);
         while($row=$result->fetch_assoc())
         {
             if($group==$row['group_number']){
                 $check=false;
             }
+            if(!empty($_POST['every_day']))
+            {
+                $_POST['every_day']=1;
+            }
+            else{
+                $_POST['every_day']=0;
+            }
         }
+
         if($check){
             $this->_model->loadFrom($_POST);
             $this->_model->save();
@@ -104,22 +109,26 @@ class Schedule extends Controller{
         }
     }
     function save(){
+
         $check=true;
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "chinatown";
         $conn = $this->SQL->mysqli;
         $sql="SELECT group_number FROM schedule";
         $result=$conn->query($sql);
         while($row=$result->fetch_assoc()){
             if($row['group_number']==$_POST['new-group']){
                 $check=false;
-                break;
+            }
+            if(!empty($_POST['every_day']))
+            {
+                $_POST['every_day']=1;
+            }
+            else{
+                $_POST['every_day']=0;
             }
         }
         if($check){
-            $sql="UPDATE schedule SET name='".$_POST['new-name']."',group_number='".$_POST['new-group'].
+            $sql="UPDATE schedule SET `name`='".$_POST['new-name']."',group_number='".
+                $_POST['new-group']."',`date`='".$_POST['date']."',every_day='". $_POST['every_day'].
                 "' WHERE id=".$_POST['id'];
             $result=$conn->query($sql);
             $this->showAll();
@@ -130,10 +139,6 @@ class Schedule extends Controller{
         }
     }
     function copy(){
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "chinatown";
         $conn = $this->SQL->mysqli;
         $sql="INSERT INTO schedule (name) 
               SELECT name

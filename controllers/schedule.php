@@ -109,13 +109,13 @@ class Schedule extends Controller{
         }
     }
     function save(){
-
+        var_dump($_POST);
         $check=true;
         $conn = $this->SQL->mysqli;
-        $sql="SELECT group_number FROM schedule";
+        $sql="SELECT group_number,id FROM schedule";
         $result=$conn->query($sql);
         while($row=$result->fetch_assoc()){
-            if($row['group_number']==$_POST['new-group']){
+            if($row['group_number']==$_POST['new-group'] && $_POST['id']!=$row['id']){
                 $check=false;
             }
             if(!empty($_POST['every_day']))

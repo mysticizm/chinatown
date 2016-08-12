@@ -109,7 +109,6 @@ class Schedule extends Controller{
         }
     }
     function save(){
-        var_dump($_POST);
         $check=true;
         $conn = $this->SQL->mysqli;
         $sql="SELECT group_number,id FROM schedule";

@@ -9,15 +9,20 @@
 	<form action="<?php echo PROJECT_DIRECTORY; ?>index.php?content=colorpicker&action=save&id=<?php echo $_GET['id']?>" method="post">
 
 		<table id="table">
+			<thead>
+				<th colspan="2">N.</th>
+				<th>Duration</th>
+				<th>Red</th>
+				<th>Green</th>
+				<th>Blue</th>
+			</thead>
 			<tbody id="haha">
+
 			<?php
 
 			$counter=1;
 			if($row=$result->num_rows){
 				while($row = $result->fetch_assoc()){
-
-					echo 'hahhahahaha';
-
 					$rgb=explode(',',$row['rgb']);
 					$r=$rgb[0];
 					$g=$rgb[1];

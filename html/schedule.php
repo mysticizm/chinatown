@@ -61,7 +61,7 @@
                 }
                 echo '</select>';
                 ?>
-                <input type="text" class="date" name="date" autocomplete="off" placeholder="New date">
+                <input type="text" class="add-date" name="date" autocomplete="off" placeholder="New date">
                 <label style="color:white;">Every day<input name="every-day" type="checkbox" /></label>
                 <input type="text" class="start_time" name="start_time" autocomplete="off" placeholder="New time">
                 <button style="" type="submit" class="button">Add schedule</button>
@@ -69,6 +69,12 @@
     </form>
 </div>
 <script>
+
+    $(document).ready(function(){
+        console.log('haa');
+        $('.add-date').datepicker({ dateFormat: 'yy-mm-dd' });
+    });
+
     $('.edit-button').one('click',function(){
         var options=$('');
         options+='<option selected="selected" style="display:none;">'+'New group'+'</option>';
@@ -81,7 +87,7 @@
             '<td><input class="new-name" placeholder="New name" name="new-name" type="text"></td>' +
             '<td><select style="width:165px" name="new-group">' + options +
             '</select></td>' +
-            '<td><input type="text" name="date" class="date" autocomplete="off"><label style="color:white;">Every day<input name="every_day" type="checkbox" /></label></td></td>' +
+            '<td><input type="text" name="date" class="date" autocomplete="off"><label style="color:white;">Every day<input class="every_day" name="every_day" type="checkbox" /></label></td></td>' +
             '<td><input type="text" class="start_time" name="start_time" autocomplete="off" placeholder="New time"></td>' +
             '<td><button style="width:82px;" class="button" type="submit">Save</button>' +
             '<button style="width:82px;" class="cancel-button button" type="button">Cancel</button></td>' +
@@ -95,9 +101,14 @@
         var $tempName = $(this).parent().parent().find('td:eq(0)')[0].innerText;
         var $tempGroupNumber = $($(this).parent().parent().find('td:eq(1)')[0].firstChild.firstChild).val().split(" ");
         var $tempDate = $($(this).parent().parent().find('td:eq(2)')[0].firstChild).val();
+        var $tempTime = $($(this).parent().parent().find('td:eq(3)')[0].firstChild).val();
+        var $checked = $($(this).parent().parent()).find('label').find('input')[0].checked;
+
         $($(this).parent().parent().next().find(".new-name")).val($tempName);
         $($(this).parent().parent().next().find("select")).val($tempGroupNumber);
         $($(this).parent().parent().next().find(".date")).val($tempDate);
+        $($(this).parent().parent().next().find(".start_time")).val($tempTime);
+        $($(this).parent().parent().next().find(".every_day")[0].checked=$checked);
     });
 
 

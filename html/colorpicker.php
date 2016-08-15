@@ -198,17 +198,15 @@
 		var hex = rgbToHex(R,G,B);
 		$(currentRow[0]).css("background-color", "rgb("+ RInput.val()+"," + GInput.val() + "," + BInput.val() + ")");
 	});
-	$('table').on("hover",function(){
-		$('tr .color').mousedown(function(){
-			var pos = $(this).position();
-			//var width=$('input').outerWidth();
 
-			$("#canvas_picker").css({
-				position: "absolute",
-				top: pos.top + 65 + "px",
-				left: (pos.left)  + "px"
-			}).toggle();
-		});
+	$('tr .color').mousedown(function(){
+		var pos = $(this).position();
+		//var width=$('input').outerWidth();
+
+		$("#canvas_picker").css({
+			position: "absolute",
+			top: pos.top + 65 + "px",
+			left: (pos.left)  + "px"
+		}).toggle();
 	});
-
 </script>

@@ -24,7 +24,7 @@
             if($row['every_day']==1){
                 echo 'checked="checked"/></label></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
-                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete schedule</a></td>
+                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete</a></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
                          <td><button class="button edit-button" type="button">Edit</button></td>
                         </tr>';
@@ -32,7 +32,7 @@
             else{
                 echo '/></label></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
-                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete schedule</a></td>
+                        <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete</a></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
                         <td><button class="button edit-button" type="button">Edit</button></td>
                         </tr>';

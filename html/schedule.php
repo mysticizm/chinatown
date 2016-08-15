@@ -49,8 +49,8 @@
 <div id="add-schedule">
     <form action="<?php echo PROJECT_DIRECTORY; ?>index.php?content=schedule&action=add" method="post">
         <div>
-            <input  name="name" type="text">
-            <select name="group_number">
+            <input  name="name" type="text" placeholder="New name">
+            <select name="group_number" placeholder="Group">
                 <option selected="selected" style="display:none">Choose group</option>
                 <option>None</option>
                 <?php
@@ -59,7 +59,7 @@
                 }
                 echo '</select>';
                 ?>
-                <input type="text" class="date" name="date" autocomplete="off">
+                <input type="text" class="date" name="date" autocomplete="off" placeholder="New date">
                 <label style="color:white;">Every day<input name="every-day" type="checkbox" /></label>
                 <button style="" type="submit" class="button">Add schedule</button>
         </div>

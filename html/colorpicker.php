@@ -13,39 +13,57 @@
 			<?php
 
 			$counter=1;
-			while($row = $result->fetch_assoc()){
-				$rgb=explode(',',$row['rgb']);
-				$r=$rgb[0];
-				$g=$rgb[1];
-				$b=$rgb[2];
-				echo '<tr>
+			if($row=$result->fetch_assoc()){
+				while($row = $result->fetch_assoc()){
+
+					echo 'hahhahahaha';
+
+					$rgb=explode(',',$row['rgb']);
+					$r=$rgb[0];
+					$g=$rgb[1];
+					$b=$rgb[2];
+					echo '<tr>
 							<td>'.$counter.'</td>
                             <td><div class="col"><input class="hidden-row" autocomplete="off" name="hex[]" type="hidden" value="'.$row['hex'].'" readonly="readonly"></div></td>
                             <td><div><input type="text" step="1" name="time[]" autocomplete="off"  value="'.$row['time'].'" placeholder="HH:MM:SS">
 											 <input type="hidden" name="id[]" value="'.$row['id'].'">
 											 <input type="hidden" class="position" name="position[]" value="'.$counter.'"></div></td>
-                            <td><div class="col"><input class="red" name="rgb[]" autocomplete="off" type="text" value="'.$r.'"></div></td>
-                            <td><div class="col"><input class="green" name="rgb[]" autocomplete="off" type="text" value="'.$g.'"></div></td>
-                            <td><div class="col"><input class="blue" name="rgb[]" autocomplete="off" type="text" value="'.$b.'"></div></td>
+                            <td><div class="col"><input class="red" name="rgb[]" autocomplete="off" type="text" value="'.$r.'" placeholder="red"></div></td>
+                            <td><div class="col"><input class="green" name="rgb[]" autocomplete="off" type="text" value="'.$g.'" placeholder="green"></div></td>
+                            <td><div class="col"><input class="blue" name="rgb[]" autocomplete="off" type="text" value="'.$b.'" placeholder="blue"></div></td>
                             <td><div class="color" style="background-color:rgb( ';
-				if($row['rgb']!==''){
-					echo $row['rgb'].')';
-				}
-				else{
-					echo '#FFFFFF';
-				}
-				echo '"></div></td>';
+					if($row['rgb']!==''){
+						echo $row['rgb'].')';
+					}
+					else{
+						echo '#FFFFFF';
+					}
+					echo '"></div></td>';
 
-				if(isset($row['rgb']) && isset($row['hex'])){
-					echo '<td><button class="button delete-row" type="button"">
+					if(isset($row['rgb']) && isset($row['hex'])){
+						echo '<td><button class="button delete-row" type="button"">
                        	'.'Delete'.'</button></td></tr>';
+					}
+					else{
+						echo '</tr>';
+					}
+					$counter++;
 				}
-				else{
-					echo '</tr>';
-				}
-				$counter++;
 			}
-
+			else{
+				echo '<tr>
+							<td>'.'1'.'</td>
+                            <td><div class="col"><input class="hidden-row" autocomplete="off" name="hex[]" type="hidden" readonly="readonly"></div></td>
+                            <td><div><input type="text" step="1" name="time[]" autocomplete="off" placeholder="HH:MM:SS">
+								 <input type="hidden" name="id[]">
+								 <input type="hidden" class="position" name="position[]" value="'.'1'.'"></div></td>
+                            <td><div class="col"><input class="red" name="rgb[]" autocomplete="off" type="text" placeholder="red"></div></td>
+                            <td><div class="col"><input class="green" name="rgb[]" autocomplete="off" type="text" placeholder="green"></div></td>
+                            <td><div class="col"><input class="blue" name="rgb[]" autocomplete="off" type="text" placeholder="blue"></div></td>
+                            <td><div class="color" style="background-color:#FFFFFF"></div></td>'.
+							'<td><button class="button delete-row" type="button"">
+                       		'.'Delete'.'</button></td></tr>';
+			}
 			?>
 			</tbody>
 		</table>
@@ -75,9 +93,9 @@
 					'<td><div><input type="text"  name="time[]" placeholder="HH:MM:SS">'	+
 					'<input class="val" type="hidden" name="id[]" value="-1">' +
 					'<input class="position" name="position[]" type="hidden" value="'+position+'"></div></td>' +
-					'<td><div class="col"><input class="red" name="rgb[]" autocomplete="off" type="text"></div></td>' +
-					'<td><div class="col"><input class="green" name="rgb[]" autocomplete="off" type="text"></div></td>' +
-					'<td><div class="col"><input class="blue" name="rgb[]" autocomplete="off" type="text"></div></td>' +
+					'<td><div class="col"><input class="red" name="rgb[]" autocomplete="off" type="text" placeholder="red"></div></td>' +
+					'<td><div class="col"><input class="green" name="rgb[]" autocomplete="off" type="text" placeholder="green"></div></td>' +
+					'<td><div class="col"><input class="blue" name="rgb[]" autocomplete="off" type="text" placeholder="blue"></div></td>' +
 					'<td><div class="color" style="background-color:white;"></div></td>' +
 					'<td><button class="button delete-row" type="button">Delete</button>' +
 					'</td></tr>');

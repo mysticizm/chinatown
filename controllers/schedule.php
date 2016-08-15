@@ -73,17 +73,13 @@ class Schedule extends Controller{
 		
 		$this->showAll();
 	}
-
-    /**
-     *
-     */
+    
     function add(){
         $group=$_POST['group_number'];
         $check=true;
         $conn = $this->SQL;
         $sql = "SELECT group_number FROM schedule";
         $result=$conn->query($sql);
-        var_dump($_POST);
         while($row=$result->fetch_assoc())
         {
             if($group==$row['group_number']){
@@ -139,12 +135,19 @@ class Schedule extends Controller{
     }
     function copy(){
         $conn = $this->SQL->mysqli;
-        $sql="INSERT INTO schedule (name) 
-              SELECT name
+        $sql="INSERT INTO schedule (name,date) 
+              SELECT name,date
               FROM schedule 
               WHERE id=".$_GET['copiedid'];
         $result=$conn->query($sql);
         $id=$conn->insert_id;
+        $sql = "SELECT name FROM schedule WHERE id=$id";
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()){
+            $name=$row['name'];
+        }
+        $sql="UPDATE schedule SET name="."'Copied ".$name."'". "WHERE id=$id";
+        $result=$conn->query($sql);
         $sql="SELECT * FROM colorpicker WHERE schedule_id=".$_GET['copiedid'];
         $result=$conn->query($sql);
         $data=array();
@@ -159,7 +162,6 @@ class Schedule extends Controller{
             $colorpicker->loadFrom($data);
             $colorpicker->save();
         }
-
         $this->showAll();
 
     }

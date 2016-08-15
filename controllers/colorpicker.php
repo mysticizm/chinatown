@@ -53,7 +53,7 @@ class Colorpicker extends Controller{
             if($_POST['rgb'][$i+2]<0){
                 $_POST['rgb'][$i+2]=0;
             }
-            $temp[$counter++]=$_POST['rgb'][$i].','.$_POST['rgb'][$i+1].','.$_POST['rgb'][$i+2];
+            $temp[$counter++]=(int)$_POST['rgb'][$i].','.(int)$_POST['rgb'][$i+1].','.(int)$_POST['rgb'][$i+2];
         }
 		if(count($_POST)>0){
             for($i = 0 ;$i < count($_POST['id']);++$i){

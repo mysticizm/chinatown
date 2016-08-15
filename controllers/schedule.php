@@ -122,7 +122,7 @@ class Schedule extends Controller{
         }
         if($check){
             $sql="UPDATE schedule SET `name`='".$_POST['new-name']."',group_number='".
-                $_POST['new-group']."',`date`='".$_POST['date']."',every_day='". $_POST['every_day'].
+                $_POST['new-group']."',`date`='".$_POST['date']."',every_day='". $_POST['every_day']."',start_time='".$_POST['start_time'].
                 "' WHERE id=".$_POST['id'];
             $result=$conn->query($sql);
             $this->showAll();

@@ -16,14 +16,7 @@ class Colorpicker extends Controller{
 	
 	function showAll()
 	{
-		$servername = "localhost";
-		$username = "root";
-		$password = "";
-		$dbname = "chinatown";
 		$conn = $this->SQL->mysqli;
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
 		$id=$_GET['id'];
 		$sql = "SELECT * FROM `colorpicker` WHERE schedule_id='".$id."' ORDER BY position";
 		$result=$conn->query($sql);

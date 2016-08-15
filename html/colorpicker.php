@@ -13,7 +13,7 @@
 			<?php
 
 			$counter=1;
-			if($row=$result->fetch_assoc()){
+			if($row=$result->num_rows){
 				while($row = $result->fetch_assoc()){
 
 					echo 'hahhahahaha';

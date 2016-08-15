@@ -3,6 +3,7 @@ $lang['All alarms'] = "Alarm list";
 $lang['Alarm'] = "Alarm";
 $lang['Avtivated on'] = "Activated on";
 $lang['Deactivated on'] = "Deactivated on";
+$lang['none'] = "No alarms";
 
 $lang['Code 1'] = "Opem door";
 $lang['Code 2'] = "Lost connection";

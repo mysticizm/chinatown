@@ -5,6 +5,7 @@
             "name"=>"",
             "group_number"=>"",
             "date"=>"",
+            "start_time"=>"",
             "every_day"=>""
         );
 

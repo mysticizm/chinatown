@@ -180,10 +180,11 @@ while (1)
     if(time() >= $lastSendSchedule + 86400) // +1 day
     {
         $data = array();
-        $resultGroup=$SQL->query("SELECT id,group_number,date,every_day,last_sent FROM schedule");
+        $resultGroup=$SQL->query("SELECT id,group_number,date,every_day,last_sent,start_time FROM schedule");
         while($row = $resultGroup->fetch_assoc()) {
             $id = $row['id'];
             $date=$row['date'];
+            $start_time=$row['start_time'];
             $last_sent_date=$row['last_sent'];
             echo $date;
             if (is_numeric($row['group_number'])) {
@@ -197,14 +198,16 @@ while (1)
                 while ($row = $result->fetch_assoc()) {
                     $data['rgb'] = getRGB($row['rgb']);
                     $data['time'] = $row['time'];
+                    $time=strtotime($data['time'])+strtotime($start_time);
+                    $result_time=date("H:i:s",$time);
                     $device = new Device();
                     $address = chr(0) . chr((1 << 7) + ($group - 1));
                     $r = Commands::setRed($address, $data['rgb'][0]);
-                    $device->sendCommand($r,'"'.date("Y-m-d")." ".$data["time"].'"');
+                    $device->sendCommand($r,'"'.date("Y-m-d")." ".$result_time.'"');
                     $g = Commands::setGreen($address, $data['rgb'][1]);
-                    $device->sendCommand($g,'"'.date("Y-m-d")." ".$data["time"].'"');
+                    $device->sendCommand($g,'"'.date("Y-m-d")." ".$result_time.'"');
                     $b = Commands::setBlue($address, $data['rgb'][2]);
-                    $device->sendCommand($b,'"'.date("Y-m-d")." ".$data["time"].'"');
+                    $device->sendCommand($b,'"'.date("Y-m-d")." ".$result_time.'"');
                     $update_last_sent=$SQL->query("UPDATE schedule SET last_sent=NOW() WHERE id=".$id);
 
                 }

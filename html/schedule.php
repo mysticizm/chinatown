@@ -23,14 +23,16 @@
                 <td><input class="td-date" type="text" value="'.$row['date'].'" readonly="readonly"><label>Every day<input name="every_day" type="checkbox" readonly="readonly" disabled="disabled"';
             if($row['every_day']==1){
                 echo 'checked="checked"/></label></td>
+                        <td><input class="td-date" type="text" value="'.$row['start_time'].'" readonly="readonly"></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete</a></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
-                         <td><button class="button edit-button" type="button">Edit</button></td>
+                        <td><button class="button edit-button" type="button">Edit</button></td>
                         </tr>';
             }
             else{
                 echo '/></label></td>
+                        <td><input class="td-date" type="text" value="'.$row['start_time'].'" readonly="readonly"></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=colorpicker&action=showAll&id=' . $row['id'] . '" class="button">Set Colours</a></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=deleteRow&deletedRow=' . $row['id'] . '" class="button confirmation">Delete</a></td>
                         <td><a href="'.PROJECT_DIRECTORY.'index.php?content=schedule&action=copy&copiedid='.$row['id'].'" class="button" type="button">Copy</button></td>
@@ -61,6 +63,7 @@
                 ?>
                 <input type="text" class="date" name="date" autocomplete="off" placeholder="New date">
                 <label style="color:white;">Every day<input name="every-day" type="checkbox" /></label>
+                <input type="text" class="start_time" name="start_time" autocomplete="off" placeholder="New time">
                 <button style="" type="submit" class="button">Add schedule</button>
         </div>
     </form>
@@ -79,6 +82,7 @@
             '<td><select style="width:165px" name="new-group">' + options +
             '</select></td>' +
             '<td><input type="text" name="date" class="date" autocomplete="off"><label style="color:white;">Every day<input name="every_day" type="checkbox" /></label></td></td>' +
+            '<td><input type="text" class="start_time" name="start_time" autocomplete="off" placeholder="New time"></td>' +
             '<td><button style="width:82px;" class="button" type="submit">Save</button>' +
             '<button style="width:82px;" class="cancel-button button" type="button">Cancel</button></td>' +
             '</tr></table></form></td></tr>');

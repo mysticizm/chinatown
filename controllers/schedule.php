@@ -87,13 +87,12 @@ class Schedule extends Controller{
             }
             if(!isset($_POST['every_day']))
             {
-                $_POST['every_day']=0;
+                $_POST['start_time  ']=0;
             }
             else{
                 $_POST['every_day']=1;
             }
         }
-        echo $_POST['every_day'];
         if($check){
             $this->_model->loadFrom($_POST);
             $this->_model->save();
@@ -135,8 +134,8 @@ class Schedule extends Controller{
     }
     function copy(){
         $conn = $this->SQL->mysqli;
-        $sql="INSERT INTO schedule (name,date) 
-              SELECT name,date
+        $sql="INSERT INTO schedule (name,date,start_time) 
+              SELECT name,date,start_time
               FROM schedule 
               WHERE id=".$_GET['copiedid'];
         $result=$conn->query($sql);

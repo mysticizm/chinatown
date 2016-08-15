@@ -566,7 +566,7 @@ img.loading
 }
 
 #schedule{
-	max-width: 1000px;
+	max-width: 1250px;
 	margin:auto;
 }
 	#schedule a{
@@ -595,7 +595,7 @@ img.loading
 		border:none;
 	}
 #add-schedule{
-	max-width:850px;
+	max-width:1050px;
 	margin:auto;
 	padding-top:50px;
 }

@@ -35,14 +35,14 @@ class Colorpicker extends Controller{
         }
         $counter=0;
         for($i=0;$i<count($_POST['rgb']);$i+=3){
-            if($_POST['rgb'][$i]>255){
+            if($_POST['rgb'][$i]>255 || !(is_numeric($_POST['rgb'][$i]))){
                 $_POST['rgb'][$i]=255;
             }
-            if($_POST['rgb'][$i+1]>255){
+            if($_POST['rgb'][$i+1]>255 || !(is_numeric($_POST['rgb'][$i]))){
                 $_POST['rgb'][$i+1]=255;
             }
-            if($_POST['rgb'][$i+1]>255){
-                $_POST['rgb'][$i+1]=255;
+            if($_POST['rgb'][$i+2]>255 || !(is_numeric($_POST['rgb'][$i]))){
+                $_POST['rgb'][$i+2]=255;
             }
             if($_POST['rgb'][$i]<0){
                 $_POST['rgb'][$i]=0;
@@ -50,8 +50,8 @@ class Colorpicker extends Controller{
             if($_POST['rgb'][$i+1]<0){
                 $_POST['rgb'][$i+1]=0;
             }
-            if($_POST['rgb'][$i+1]<0){
-                $_POST['rgb'][$i+1]=0;
+            if($_POST['rgb'][$i+2]<0){
+                $_POST['rgb'][$i+2]=0;
             }
             $temp[$counter++]=$_POST['rgb'][$i].','.$_POST['rgb'][$i+1].','.$_POST['rgb'][$i+2];
         }

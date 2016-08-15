@@ -38,10 +38,10 @@ class Colorpicker extends Controller{
             if($_POST['rgb'][$i]>255 || !(is_numeric($_POST['rgb'][$i]))){
                 $_POST['rgb'][$i]=255;
             }
-            if($_POST['rgb'][$i+1]>255 || !(is_numeric($_POST['rgb'][$i]))){
+            if($_POST['rgb'][$i+1]>255 || !(is_numeric($_POST['rgb'][$i+1]))){
                 $_POST['rgb'][$i+1]=255;
             }
-            if($_POST['rgb'][$i+2]>255 || !(is_numeric($_POST['rgb'][$i]))){
+            if($_POST['rgb'][$i+2]>255 || !(is_numeric($_POST['rgb'][$i+2]))){
                 $_POST['rgb'][$i+2]=255;
             }
             if($_POST['rgb'][$i]<0){

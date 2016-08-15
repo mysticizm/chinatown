@@ -73,7 +73,7 @@ class Schedule extends Controller{
 		
 		$this->showAll();
 	}
-    
+
     function add(){
         $group=$_POST['group_number'];
         $check=true;
@@ -85,15 +85,15 @@ class Schedule extends Controller{
             if($group==$row['group_number']){
                 $check=false;
             }
-            if(!empty($_POST['every_day']))
+            if(!isset($_POST['every_day']))
             {
-                $_POST['every_day']=1;
-            }
-            else{
                 $_POST['every_day']=0;
             }
+            else{
+                $_POST['every_day']=1;
+            }
         }
-
+        echo $_POST['every_day'];
         if($check){
             $this->_model->loadFrom($_POST);
             $this->_model->save();

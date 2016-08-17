@@ -86,18 +86,7 @@ class MyMySQL extends formatSQL
 		$values = array();
 		foreach ($keys as $key)
 		{
-			if (str_replace("date", "", $key) != $key)
-			{
-				if ($post[$key] != "NOW()")
-				{
-					$postval = $this->bgdate_to_date($post[$key]);
-				}
-				else
-				{
-					$postval = $post[$key];
-				}
-			}
-			else if ($post[$key] === '')
+			if ($post[$key] === '')
 			{
 				$postval = 'null';
 			}

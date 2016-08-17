@@ -184,9 +184,8 @@ while (1)
         while($row = $resultGroup->fetch_assoc()) {
             $id = $row['id'];
             $date=$row['date'];
-            $start_time=$row['start_time'];
+            $start_time = $row['start_time'];
             $last_sent_date=$row['last_sent'];
-            echo $date;
             if (is_numeric($row['group_number'])) {
                 $group = $row['group_number'];
             } else {
@@ -194,22 +193,28 @@ while (1)
             }
             if((($date == date("Y-m-d")) || (($date <= date("Y-m-d")) && ($row['every_day']==1))) && ((strtotime($row['last_sent']) + 86400)<=time()))
             {
+                $update_last_sent=$SQL->query("UPDATE schedule SET last_sent=NOW() WHERE id=".$id);
                 $result = $SQL->query("SELECT rgb,time FROM colorpicker WHERE schedule_id=" . $id);
                 while ($row = $result->fetch_assoc()) {
                     $data['rgb'] = getRGB($row['rgb']);
-                    $data['time'] = $row['time'];
-                    $time=strtotime($data['time'])+strtotime($start_time);
-                    $result_time=date("H:i:s",$time);
+                    $data['time'] = explode(':',$row['time']);
+                    $colorpickerSeconds = ($data['time'][0] * 60 * 60) + ($data['time'][1] * 60) + $data['time'][2];
+
                     $device = new Device();
+
                     $address = chr(0) . chr((1 << 7) + ($group - 1));
                     $r = Commands::setRed($address, $data['rgb'][0]);
-                    $device->sendCommand($r,'"'.date("Y-m-d")." ".$result_time.'"');
-                    $g = Commands::setGreen($address, $data['rgb'][1]);
-                    $device->sendCommand($g,'"'.date("Y-m-d")." ".$result_time.'"');
-                    $b = Commands::setBlue($address, $data['rgb'][2]);
-                    $device->sendCommand($b,'"'.date("Y-m-d")." ".$result_time.'"');
-                    $update_last_sent=$SQL->query("UPDATE schedule SET last_sent=NOW() WHERE id=".$id);
+                    $device->sendCommand($r,'"'.date("Y-m-d")." ".$start_time.'"');
 
+                    $g = Commands::setGreen($address, $data['rgb'][1]);
+                    $device->sendCommand($g,'"'.date("Y-m-d")." ".$start_time.'"');
+
+                    $b = Commands::setBlue($address, $data['rgb'][2]);
+                    $device->sendCommand($b,'"'.date("Y-m-d")." ".$start_time.'"');
+
+                    $start_time=strtotime($start_time)+$colorpickerSeconds;
+                    $start_time=date("H:i:s",$start_time);
+                    echo $start_time.'---';
                 }
             }
         }

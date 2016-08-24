@@ -19,7 +19,7 @@ jQuery(document).ready(function()
 	google.maps.event.addListener(map, 'zoom_changed', function(event) 
 	{
 		//alert(map.getZoom());
-		if(map.getZoom() >= 18)
+		if(map.getZoom() >= 19)
 		{
 			for (i in deviceMarkers)
 			{

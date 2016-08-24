@@ -37,18 +37,20 @@ class DeviceAdmin extends Devices
 	
 	private function groupsFromPost()
 	{
+		$this->_model->properties['groups'] = 0;
 		if (isset($_POST['groups']))
 		{
-			$this->_model->properties['groups'] = 0;
+			
 			foreach ($_POST['groups'] as $key => $value)
 			{
 				$this->_model->properties['groups'] += $value;
 			}
 		}
 		
+		$this->_model->properties['options'] = 0;
 		if (isset($_POST['options']))
 		{
-			$this->_model->properties['options'] = 0;
+			
 			foreach ($_POST['options'] as $key => $value)
 			{
 				$this->_model->properties['options'] += $value;
@@ -155,30 +157,57 @@ class DeviceAdmin extends Devices
 				$properties[$key] = $value;
 			}
 		}
+		
 		if (count($properties) || $_POST['level'])
 		{
 			$this->_model->properties = $properties;
 			$where = "1";
+
 			if ($group)
 			{
-				$shift = $group - 1;
-				$where = "(groups >> $shift) & 1";
-				$address = chr(0).chr((1 << 7) + $shift);
+                $shift = $group - 1;
+                $where = "(1 << $shift) & groups";
+
+				if (count($properties))
+				{
+					$this->_model->update($where);
+				}
+				
+				$result = $this->SQL->query("SELECT address FROM devices WHERE $where");
+				while($row = $result->fetch_assoc())
+				{
+					$this->_model->properties['address'] = $row['address'];
+					$address=$this->_model->getAddress();
+					
+					$this->_model->sendSettings($address);
+					if (($_POST['red']) || ($_POST['green']) || ($_POST['blue']))
+					{
+						$this->_model->setColor((int)$_POST['red'], (int)$_POST['green'], (int)$_POST['blue'], (int)$_POST['level'], $address);
+					}
+					else
+					{
+						$this->_model->fastCommand(Commands::setCurrentLevel($address, $_POST['level']));
+					}
+				}
 			}
 			else
 			{
 				$address = chr(0).chr(0xFE);
-			}
-			$this->_model->update($where);
-			$this->_model->sendSettings($address);
-			
-			if ($_POST['red'] && $_POST['green'] && $_POST['blue'])
-			{
-				$this->_model->setColor((int)$_POST['red'], (int)$_POST['green'], (int)$_POST['blue'], (int)$_POST['level'], $address);
-			}
-			else
-			{
-				$this->_model->fastCommand(Commands::setCurrentLevel($address, $_POST['level']));
+                $this->_model->sendSettings($address);
+				
+				if (count($properties))
+				{
+					$this->_model->update($where);
+				}
+
+				if (isset($_POST['red']) && isset($_POST['green']) && isset($_POST['blue']))
+				{
+					$this->_model->setColor((int)$_POST['red'], (int)$_POST['green'], (int)$_POST['blue'], (int)$_POST['level'], $address);
+				}
+				else
+				{
+					$this->_model->fastCommand(Commands::setCurrentLevel($address, $_POST['level']));
+				}
 			}
 		}
 		

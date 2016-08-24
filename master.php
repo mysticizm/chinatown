@@ -61,7 +61,7 @@ function proceedAnswer($answer, $SQL, $device)
                 $blue = hexdec($bytes[9]);
                 $green = hexdec($bytes[10]);
 
-                $device->SQL->query("UPDATE devices SET level = $level, red = $red, green = $green, blue = $blue, levels_time = CURRENT_TIMESTAMP WHERE address = '".$answer->getAddress()."'");
+                $SQL->query("UPDATE devices SET level = $level, red = $red, green = $green, blue = $blue, levels_time = CURRENT_TIMESTAMP WHERE address = '".$answer->getAddress()."'");
 
                 $prop["power_on_level"] = hexdec($bytes[7]);
                 $prop["min_level"] = hexdec($bytes[6]);
@@ -122,6 +122,114 @@ function proceedAnswer($answer, $SQL, $device)
 
         $device->seen($answer->getAddress());
     }
+    elseif(isset($bytes[0]) && ($bytes[0] == 'AF') && (count($bytes) == 6))
+    {
+        switch($bytes[3][0])
+        {
+            //Add Group
+            case '4':
+                $address = $bytes[1].$bytes[2];
+                $device->loadByAddress($address);
+				$group = hexdec($bytes[3][1])+16;
+				
+				if ($device->properties['id'])
+				{
+					$mask = (1 << $group);
+					$device->properties['groups'] = $device->properties['groups'] | $mask;
+					$device->save();
+				}
+				$s_mess = Commands::addToGroup($device->getAddress(),$group);
+				$device->sendCommand($s_mess);
+                break;
+				
+            case '6':
+                $address = $bytes[1].$bytes[2];
+                $device->loadByAddress($address);
+				$group = hexdec($bytes[3][1]);
+				
+				if ($device->properties['id'])
+				{
+					$mask = (1 << $group);
+					$device->properties['groups'] = $device->properties['groups'] | $mask;
+					$device->save();
+				}
+                $s_mess = Commands::addToGroup($device->getAddress(),$group);
+                $device->sendCommand($s_mess);
+                break;
+				
+            //Remove Group
+            case '5':
+                $group = hexdec($bytes[3][1]) + 16;
+                $address = $bytes[1].$bytes[2];
+                $device->loadByAddress($address);
+
+                if ($device->properties['id'])
+				{
+					$mask = 0;
+					for ($i = 0; $i <= 31; $i++)
+					{
+						if ($i != $group)
+						{
+							$mask += (1 << $i);
+						}
+					}
+
+					$device->properties['groups'] = $device->properties['groups'] & $mask;
+					$device->save();
+				}
+                $s_mess = Commands::removeFromGroup($device->getAddress(),$group);
+                $device->sendCommand($s_mess);
+                break;
+				
+            case '7':
+                $group = hexdec($bytes[3][1]);
+
+                $address = $bytes[1].$bytes[2];
+                $device->loadByAddress($address);
+				
+				if ($device->properties['id'])
+				{
+					$mask = 0;
+					for ($i = 0; $i <= 31; $i++)
+					{
+						if ($i != $group)
+						{
+							$mask += (1 << $i);
+						}
+					}
+
+					$device->properties['groups'] = $device->properties['groups'] & $mask;
+					$device->save();
+				}
+                $s_mess = Commands::removeFromGroup($device->getAddress(),$group);
+                $device->sendCommand($s_mess);
+                break;
+				
+			default:
+				if (($bytes[1][0] == '8') || ($bytes[1][0] == '9'))
+				{
+					$group = hexdec($bytes[2]);
+					if ($bytes[1][0] == '9')
+					{
+						$group += 16;
+					}
+					
+					$addresses = $SQL->query("SELECT address FROM devices WHERE (1 << ($group - 1)) & groups");
+					echo $addresses->num_rows;
+					while ($row = $addresses->fetch_object())
+					{
+						$s_mess = chr(0xFF);
+						$device->properties['address'] = $row->address;
+						$s_mess.=$device->getAddress();
+						$s_mess.=chr(hexdec($bytes[3]));
+						$s_mess.=chr(hexdec($bytes[4]));
+						$s_mess.=chr(hexdec($bytes[5]));
+						$device->sendCommand($s_mess);
+					}
+				}
+				break;
+        }
+    }
 }
 function getRGB($string)
 {
@@ -142,6 +250,9 @@ $system = GetSysVars($SQL);
 $lastAnswer = time() - $system->after_reply;
 $lastSend = time() - $system->send_interval;
 $lastSendSchedule = 0;
+
+$answer = new Answer('AF80041002EF');
+proceedAnswer($answer, $SQL, $device);
 
 while (1)
 {
@@ -202,19 +313,39 @@ while (1)
 
                     $device = new Device();
 
-                    $address = chr(0) . chr((1 << 7) + ($group - 1));
-                    $r = Commands::setRed($address, $data['rgb'][0]);
-                    $device->sendCommand($r,'"'.date("Y-m-d")." ".$start_time.'"');
+                    $res = $SQL->query("SELECT group_number FROM schedule");
+                    $selectedGroups = array();
+                    while($group = $res->fetch_assoc())
+                    {
+                        $selectedGroups['number']=$group['group_number'];
+                    }
 
-                    $g = Commands::setGreen($address, $data['rgb'][1]);
-                    $device->sendCommand($g,'"'.date("Y-m-d")." ".$start_time.'"');
+                    foreach($selectedGroups as $gr)
+                    {
 
-                    $b = Commands::setBlue($address, $data['rgb'][2]);
-                    $device->sendCommand($b,'"'.date("Y-m-d")." ".$start_time.'"');
+                        $shift = $gr - 1;
 
+                        $addresses = $SQL->query("SELECT address FROM devices WHERE (1 << $shift) & groups");
+
+
+                        while($adr = $addresses->fetch_assoc())
+                        {
+                            $device->properties['address'] = $adr['address'];
+                            $address=$device->getAddress();
+
+                            $r = Commands::setRed($address, $data['rgb'][0]);
+                            $device->sendCommand($r,'"'.date("Y-m-d")." ".$start_time.'"');
+
+                            $g = Commands::setGreen($address, $data['rgb'][1]);
+                            $device->sendCommand($g,'"'.date("Y-m-d")." ".$start_time.'"');
+
+                            $b = Commands::setBlue($address, $data['rgb'][2]);
+                            $device->sendCommand($b,'"'.date("Y-m-d")." ".$start_time.'"');
+                        }
+                    }
+                    //$address = chr(0) . chr((1 << 7) + ($group - 1));
                     $start_time=strtotime($start_time)+$colorpickerSeconds;
                     $start_time=date("H:i:s",$start_time);
-                    echo $start_time.'---';
                 }
             }
         }

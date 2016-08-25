@@ -67,8 +67,8 @@ function proceedAnswer($answer, $SQL, $device)
                 $prop["min_level"] = hexdec($bytes[6]);
                 $prop["max_level"] = hexdec($bytes[5]);
 
-                $device->setWorktime($answer->getAddress(), $prop["worktime"]);
-                $resendProps = getMissmatch($device, $prop, $answer->getAddress());
+                //$device->setWorktime($answer->getAddress(), $prop["worktime"]);
+                /*$resendProps = getMissmatch($device, $prop, $answer->getAddress());
 
                 if (count($resendProps))
                 {
@@ -77,7 +77,7 @@ function proceedAnswer($answer, $SQL, $device)
                     $device->sendSettings();
 
                     $device->sendFlashQuery();
-                }
+                }*/
                 break;
 
             case 'ED':
@@ -106,16 +106,16 @@ function proceedAnswer($answer, $SQL, $device)
                 {
                     $device->properties = $resendProps;
                     $device->properties['address'] = $answer->getAddress();
-                    $device->sendSettings();
+                    //$device->sendSettings();
                     if (isset($resendProps['groups']))
                     {
                         $device->syncGroups($prop["groups"]);
                     }
-                    if (isset($resendProps['options']))
+                    /*if (isset($resendProps['options']))
                     {
                         $device->syncOptions($prop["options"]);
-                    }
-                    $device->sendFlashQuery();
+                    }*/
+                    //$device->sendFlashQuery();
                 }
                 break;
         }
@@ -124,6 +124,11 @@ function proceedAnswer($answer, $SQL, $device)
     }
     elseif(isset($bytes[0]) && ($bytes[0] == 'AF') && (count($bytes) == 6))
     {
+		$device->properties = array(
+			'id'=>null,
+			'address'=>"",
+			'groups'=>0
+		);
         switch($bytes[3][0])
         {
             //Add Group
@@ -139,7 +144,7 @@ function proceedAnswer($answer, $SQL, $device)
 					$device->save();
 				}
 				$s_mess = Commands::addToGroup($device->getAddress(),$group);
-				$device->sendCommand($s_mess);
+				$device->fastCommand($s_mess);
                 break;
 				
             case '6':
@@ -154,7 +159,7 @@ function proceedAnswer($answer, $SQL, $device)
 					$device->save();
 				}
                 $s_mess = Commands::addToGroup($device->getAddress(),$group);
-                $device->sendCommand($s_mess);
+                $device->fastCommand($s_mess);
                 break;
 				
             //Remove Group
@@ -178,7 +183,7 @@ function proceedAnswer($answer, $SQL, $device)
 					$device->save();
 				}
                 $s_mess = Commands::removeFromGroup($device->getAddress(),$group);
-                $device->sendCommand($s_mess);
+                $device->fastCommand($s_mess);
                 break;
 				
             case '7':
@@ -202,20 +207,20 @@ function proceedAnswer($answer, $SQL, $device)
 					$device->save();
 				}
                 $s_mess = Commands::removeFromGroup($device->getAddress(),$group);
-                $device->sendCommand($s_mess);
+                $device->fastCommand($s_mess);
                 break;
 				
 			default:
-				if (($bytes[1][0] == '8') || ($bytes[1][0] == '9'))
+				if (($bytes[2][0] == '8') || ($bytes[2][0] == '9'))
 				{
-					$group = hexdec($bytes[2]);
-					if ($bytes[1][0] == '9')
+					$group = hexdec($bytes[1][1]);
+					if ($bytes[2][0] == '9')
 					{
 						$group += 16;
 					}
 					
 					$addresses = $SQL->query("SELECT address FROM devices WHERE (1 << ($group - 1)) & groups");
-					echo $addresses->num_rows;
+					//echo $addresses->num_rows;
 					while ($row = $addresses->fetch_object())
 					{
 						$s_mess = chr(0xFF);
@@ -224,7 +229,7 @@ function proceedAnswer($answer, $SQL, $device)
 						$s_mess.=chr(hexdec($bytes[3]));
 						$s_mess.=chr(hexdec($bytes[4]));
 						$s_mess.=chr(hexdec($bytes[5]));
-						$device->sendCommand($s_mess);
+						$device->fastCommand($s_mess);
 					}
 				}
 				break;
@@ -251,8 +256,8 @@ $lastAnswer = time() - $system->after_reply;
 $lastSend = time() - $system->send_interval;
 $lastSendSchedule = 0;
 
-$answer = new Answer('AF80041002EF');
-proceedAnswer($answer, $SQL, $device);
+//$answer = new Answer('AF80041002EF');
+//proceedAnswer($answer, $SQL, $device);
 
 while (1)
 {

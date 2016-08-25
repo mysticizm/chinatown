@@ -213,5 +213,75 @@ class DeviceAdmin extends Devices
 		
 		$this->showList();
 	}
+	
+	function import()
+	{
+		$this->SQL->query("TRUNCATE TABLE devices");
+		$file = file_get_contents('fixtures.geojson');
+		$array = json_decode($file);
+		foreach ($array->features as $key => $feature)
+		{
+			$device = array(
+				'left'=> $feature->properties->left,
+				'right'=> $feature->properties->right,
+				'lat'=> $feature->geometry->coordinates[1],
+				'lng'=> $feature->geometry->coordinates[0]
+			);
+			if ($device['left'])
+			{
+				$this->_model->properties['name'] = "L ".$device['left'];
+				$addr = $device['left'];
+				if ($addr >= 0x80)
+				{
+					echo $addr.' -> '.((0x0F80 & $addr) * 2).' + '.(0x007F & $addr);
+					$addr = ((0x0F80 & $addr) * 2) + (0x007F & $addr);
+				}
+				echo ' = '.$addr;
+				$address = dechex($addr);
+				for ($i = strlen($address); $i < 4; $i++)
+				{
+					$address = '0'.$address;
+				}
+				echo ' = '.$address.'<br/>';
+				$this->_model->properties['address'] = $address;
+				$this->_model->properties['lat'] = $device['lat'] + 0.00001;
+				$this->_model->properties['lng'] = $device['lng'] - 0.00001;
+				
+				$this->_model->add();
+				
+				if($this->SQL->mysqli->error)
+				{
+					echo $device['left']."<br/>";
+				}
+			}
+			if ($device['right'])
+			{
+				$this->_model->properties['name'] = "R ".$device['right'];
+				$addr = $device['right'];
+				if ($addr >= 0x80)
+				{
+					echo $addr.' -> '.((0x0F80 & $addr) * 2).' + '.(0x007F & $addr);
+					$addr = ((0x0F80 & $addr) * 2) + (0x007F & $addr);
+				}
+				echo ' = '.$addr;
+				$address = dechex($addr);
+				for ($i = strlen($address); $i < 4; $i++)
+				{
+					$address = '0'.$address;
+				}
+				echo ' = '.$address.'<br/>';
+				$this->_model->properties['address'] = $address;
+				$this->_model->properties['lat'] = $device['lat'] - 0.00001;
+				$this->_model->properties['lng'] = $device['lng'] + 0.00001;
+				
+				$this->_model->add();
+				
+				if($this->SQL->mysqli->error)
+				{
+					echo $device['right']."<br/>";
+				}
+			}
+		}
+	}
 }
 ?>

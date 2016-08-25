@@ -50,7 +50,7 @@ if ($device->id && !$device->active)
 				type="text" 
 				name="addressdec" 
 				maxlength="4" 
-				value="<?php echo hexdec($device->address); ?>" 
+				value="" 
 				<?php
 				if ($_SESSION['access'] < 800)
 				{
@@ -148,17 +148,24 @@ function validatePowers()
 	return 1;
 }
 
-jQuery('input[name="address"]').change(function()
+function getDecAddr()
 {
 	jQuery.get("index.php",
 	{
 		content: "devices",
 		action: "hexdecAddress",
-		address: jQuery(this).val()
+		address: jQuery('input[name="address"]').val()
 	}, function(data)
 	{
 		jQuery('input[name="addressdec"]').val(data);
 	});
+}
+
+getDecAddr();
+
+jQuery('input[name="address"]').change(function()
+{
+	getDecAddr();
 });
 
 jQuery('input[name="addressdec"]').change(function()

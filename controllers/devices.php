@@ -140,7 +140,9 @@ class Devices extends Controller
 	{
 		if (isset($_REQUEST['address']))
 		{
-			$address = dechex($_REQUEST['address']);
+			$addr = (int)$_REQUEST['address'];
+			$addr = ((0x0F80 & $addr) * 2) + (0x007F & $addr);
+			$address = dechex($addr);
 			for ($i = strlen($address); $i < 4; $i++)
 			{
 				$address = '0'.$address;
@@ -153,8 +155,11 @@ class Devices extends Controller
 	function hexdecAddress()
 	{
 		if (isset($_REQUEST['address']))
-		{
-			echo hexdec($_REQUEST['address']);
+		{	
+			$addr = hexdec($_REQUEST['address']);
+			$addr = ((0x0F00 & $addr) / 2) + (0x007F & $addr);
+			
+			echo $addr;
 		}
 	}
 }

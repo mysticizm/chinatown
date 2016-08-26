@@ -213,13 +213,13 @@ function proceedAnswer($answer, $SQL, $device)
 			default:
 				if (($bytes[2][0] == '8') || ($bytes[2][0] == '9'))
 				{
-					$group = hexdec($bytes[1][1]);
+					$group = hexdec($bytes[2][1]);
 					if ($bytes[2][0] == '9')
 					{
 						$group += 16;
 					}
 					
-					$addresses = $SQL->query("SELECT address FROM devices WHERE (1 << ($group - 1)) & groups");
+					$addresses = $SQL->query("SELECT address FROM devices WHERE (1 << $group) & groups");
 					//echo $addresses->num_rows;
 					while ($row = $addresses->fetch_object())
 					{

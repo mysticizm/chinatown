@@ -129,12 +129,42 @@ class DeviceAdmin extends Devices
 	
 	function setScene()
 	{
-		$id = (int)$_REQUEST['id'];
 		$scene = (int)$_REQUEST['scene'];
 		
-		$this->_model->load($id);
+		if (isset($_REQUEST['id']))
+		{
+			$id = (int)$_REQUEST['id'];
+			
+			$this->_model->load($id);
+			
+			$this->_model->fastCommand(Commands::setColor($this->_model->getAddress(), $scene));
+		}
 		
-		$this->_model->fastCommand(Commands::setColor($this->_model->getAddress(), $scene));
+		if (isset($_REQUEST['group']))
+		{
+			$group = (int)$_REQUEST['group'];
+			
+			if ($group)
+			{
+                $shift = $group - 1;
+                $where = "(1 << $shift) & groups";
+				
+				$result = $this->SQL->query("SELECT address FROM devices WHERE $where");
+				while($row = $result->fetch_assoc())
+				{
+					$this->_model->properties['address'] = $row['address'];
+					$address=$this->_model->getAddress();
+					
+					$this->_model->fastCommand(Commands::setColor($this->_model->getAddress(), $scene));
+				}
+			}
+			else
+			{
+				$address = chr(0).chr(0xFE);
+				
+                $this->_model->fastCommand(Commands::setColor($this->_model->getAddress(), $scene));
+			}
+		}
 	}
 	
 	function broadcast()
